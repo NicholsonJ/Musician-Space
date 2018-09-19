@@ -13,14 +13,14 @@ const errHandler = err => {
 export default {
   service: service,
 
-  getCountries() {
+  getSpaces() {
     return service
       .get('/countries')
       .then(res => res.data)
       .catch(errHandler);
   },
 
-  postCountries(data) {
+  postSpaces(data) {
     return service
       .post('/countries', data)
       .then(res => res.data)
@@ -45,7 +45,7 @@ export default {
     return service
       .post('/login', {
         username,
-        password,
+        password
       })
       .then(res => {
         localStorage.setItem('user', JSON.stringify(res.data));
@@ -55,11 +55,9 @@ export default {
   },
 
   logout() {
-    return service
-      .get('/logout')
-      .then(res => {
-        localStorage.removeItem('user');
-      })
+    return service.get('/logout').then(res => {
+      localStorage.removeItem('user');
+    });
   },
 
   // loadUser() {
@@ -74,20 +72,19 @@ export default {
   // },
 
   isLoggedIn() {
-    return localStorage.getItem('user') != null
+    return localStorage.getItem('user') != null;
   },
-
 
   addPicture(file) {
     const formData = new FormData();
-    formData.append("picture", file)
+    formData.append('picture', file);
     return service
       .post('/users/first-user/pictures', formData, {
         headers: {
-          'Content-Type': 'multipart/form-data',
-        },
+          'Content-Type': 'multipart/form-data'
+        }
       })
       .then(res => res.data)
       .catch(errHandler);
-  },
+  }
 };
