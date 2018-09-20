@@ -15,7 +15,7 @@ import {
   CardImg,
   CardImgOverlay
 } from 'reactstrap';
-//import PinInactive from '../markers/PinInactive';
+import PinInactive from '../markers/PinInactive';
 
 class Spaces extends Component {
   constructor(props) {
@@ -69,9 +69,9 @@ class Spaces extends Component {
           <Col>
             <div style={{ width: '100%', height: 'calc(100vh - 40px)' }}>
               <GoogleMap margin={[10, 20, 30, 40]} center={{ lat: 45.75801, lng: 4.8000159 }} zoom={10}>
-                {/* {this.state.spaces.map(s => (
+                {this.state.spaces.map(s => (
                   <PinInactive key={s.name} lat={s.loc.lat} lng={s.loc.lng} />
-                ))} */}
+                ))}
               </GoogleMap>
             </div>
           </Col>
