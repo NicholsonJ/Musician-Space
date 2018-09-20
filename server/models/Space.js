@@ -7,14 +7,23 @@ const spaceSchema = new mongoose.Schema({
     minlength: 1
   },
   loc: {
-    type: 'Point',
-    coordinates: [String],
-    required: [true, 'The practice space name is required']
+    type: {
+      type: String,
+      default: 'Point'
+    },
+    lat: String,
+    lng: String
   },
   website: String,
+  type: [String],
   description: String,
   price: String,
   picture: String,
+
+  deleteRequests: {
+    type: String,
+    default: '0'
+  },
   _user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'

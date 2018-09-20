@@ -7,8 +7,8 @@ import Secret from './pages/Secret';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import api from '../api';
-import logo from '../logo.svg';
 import './App.css';
+import SpaceDetail from './pages/SpaceDetail';
 
 class App extends Component {
   constructor(props) {
@@ -27,11 +27,9 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React Spaces</h1>
           <Link to="/">Home</Link>
           <Link to="/spaces">Spaces</Link>
-          <Link to="/add-space">Add Space</Link>
+          {api.isLoggedIn() && <Link to="/add-space">Add Space</Link>}
           {!api.isLoggedIn() && <Link to="/signup">Signup</Link>}
           {!api.isLoggedIn() && <Link to="/login">Login</Link>}
           {api.isLoggedIn() && (
@@ -44,6 +42,7 @@ class App extends Component {
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/spaces" component={Spaces} />
+          <Route path="/details/:id" component={SpaceDetail} />
           <Route path="/add-space" component={AddSpace} />
           <Route path="/signup" component={Signup} />
           <Route path="/login" component={Login} />

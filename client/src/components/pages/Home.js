@@ -1,4 +1,16 @@
 import React, { Component } from 'react';
+import {
+  Form,
+  FormGroup,
+  Button,
+  InputGroup,
+  InputGroupAddon,
+  Container,
+  Row,
+  Col,
+  Label,
+  Input
+} from 'reactstrap';
 
 class Home extends Component {
   // constructor(props) {
@@ -6,12 +18,19 @@ class Home extends Component {
   //   this.state = {
   //   }
   // }
-  render() {                
+  render() {
     return (
-      <div className="Home">
+      <Container className="Home h-100">
         <h2>Home</h2>
-        <p>This is a sample project with the MERN stack</p>
-      </div>
+        <Form className="row h-100 justify-content-center align-items-center">
+          <InputGroup className="form-group">
+            <Input placeholder="Where do you need a space?" className="form-control" />
+            <InputGroupAddon addonType="append">
+              <Button color="success">Let's go!</Button>
+            </InputGroupAddon>
+          </InputGroup>
+        </Form>
+      </Container>
     );
   }
 }

@@ -15,14 +15,14 @@ export default {
 
   getSpaces() {
     return service
-      .get('/countries')
+      .get('/spaces')
       .then(res => res.data)
       .catch(errHandler);
   },
 
   postSpaces(data) {
     return service
-      .post('/countries', data)
+      .post('/spaces', data)
       .then(res => res.data)
       .catch(errHandler);
   },
