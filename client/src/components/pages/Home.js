@@ -1,16 +1,5 @@
 import React, { Component } from 'react';
-import {
-  Form,
-  FormGroup,
-  Button,
-  InputGroup,
-  InputGroupAddon,
-  Container,
-  Row,
-  Col,
-  Label,
-  Input
-} from 'reactstrap';
+import { Form, Button, InputGroup, InputGroupAddon, Container, Input } from 'reactstrap';
 
 class Home extends Component {
   // constructor(props) {

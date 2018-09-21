@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 // import { Route, Switch, NavLink, Link } from 'react-router-dom';
 import api from '../../api';
 // import './AddCountry.css';
-import { Col, Button, Container, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Col, Row, Button, Container, Form, FormGroup, Label, Input } from 'reactstrap';
+import LocationSearchInput from './LocationSearch';
 
 class AddSpace extends Component {
   constructor(props) {
@@ -11,11 +12,16 @@ class AddSpace extends Component {
       name: '',
       address: '',
       website: '',
+      loc: {
+        lat: '',
+        lng: ''
+      },
       picture: '',
       price: '',
       description: '',
       message: null
     };
+    this.handleSelect = this.handleSelect.bind(this);
   }
 
   handleInputChange(stateFieldName, event) {
@@ -29,9 +35,12 @@ class AddSpace extends Component {
     console.log(this.state.name, this.state.description);
     let data = {
       name: this.state.name,
-      address: this.state.address,
       website: this.state.website,
       picture: this.state.picture,
+      loc: {
+        lat: this.state.loc.lat,
+        lng: this.state.loc.lng
+      },
       price: this.state.price,
       description: this.state.description
     };
@@ -44,6 +53,10 @@ class AddSpace extends Component {
           address: '',
           website: '',
           picture: '',
+          loc: {
+            lat: '',
+            lng: ''
+          },
           price: '',
           description: '',
           message: `Your space '${this.state.name}' has been created`
@@ -57,6 +70,18 @@ class AddSpace extends Component {
       .catch(err => {
         console.log('ERROR');
       });
+  }
+  handleSelect(latLng, address) {
+    console.log('address: ', address);
+    console.log(latLng);
+
+    this.setState({
+      loc: {
+        lat: latLng.lat,
+        lng: latLng.lng
+      },
+      address
+    });
   }
   render() {
     return (
@@ -99,16 +124,10 @@ class AddSpace extends Component {
               Address
             </Label>
             <Col sm={10}>
-              <Input
-                name="text"
-                id="address"
-                type="text"
-                value={this.state.address}
-                onChange={e => {
-                  this.handleInputChange('address', e);
-                }}
-                placeholder="Where can we find the room?"
-              />
+              <Row>
+                <LocationSearchInput onSelect={this.handleSelect} id="address" />
+                {this.state.address && <span>Your address: {this.state.address}</span>}
+              </Row>
             </Col>
           </FormGroup>
           <FormGroup row>

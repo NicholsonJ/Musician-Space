@@ -21,7 +21,9 @@ class Spaces extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      spaces: []
+      spaces: [],
+      center: { lat: 52.506, lng: 13.37 },
+      zoom: 2
     };
   }
   componentDidMount() {
@@ -35,6 +37,16 @@ class Spaces extends Component {
       })
       .catch(err => console.log(err));
   }
+
+  handleClick(e, s) {
+    this.setState({
+      center: {
+        lat: Number(s.loc.lat),
+        lng: Number(s.loc.lng)
+      }
+    });
+  }
+
   render() {
     return (
       <div className="Spaces">
@@ -50,31 +62,35 @@ class Spaces extends Component {
             </Label>
           </FormGroup>
         </Form>
-        <Container style={{ display: 'flex' }}>
-          <Col xs="6" sm="4">
-            <h2>List of spaces</h2>
-            {this.state.spaces.map((s, i) => (
-              <Card inverse key={i}>
-                <CardImg width="100%" src="/images/pianoDefault.jpg" alt="Card image cap" />
-                <CardImgOverlay>
-                  <CardTitle>{s.name}</CardTitle>
-                  <CardText>{s.description}</CardText>
-                  <CardText>
-                    <small className="text-muted">Last updated 3 mins ago</small>
-                  </CardText>
-                </CardImgOverlay>
-              </Card>
-            ))}
-          </Col>
-          <Col>
-            <div style={{ width: '100%', height: 'calc(100vh - 40px)' }}>
-              <GoogleMap margin={[10, 20, 30, 40]} center={{ lat: 45.75801, lng: 4.8000159 }} zoom={10}>
-                {this.state.spaces.map(s => (
-                  <PinInactive key={s.name} lat={s.loc.lat} lng={s.loc.lng} />
+        <Container>
+          <Row>
+            <Col m="6" sm="4">
+              <h2>List of spaces</h2>
+              <Container className="pre-scrollable mt-3" style={{ maxHeight: '75vh' }}>
+                {this.state.spaces.map((s, i) => (
+                  <Card inverse key={i} onClick={e => this.handleClick(e, s)}>
+                    <CardImg width="100%" src="/images/pianoDefault.jpg" alt="Card image cap" />
+                    <CardImgOverlay>
+                      <CardTitle>{s.name}</CardTitle>
+                      <CardText>{s.description}</CardText>
+                      <CardText>
+                        <small className="text-muted">Last updated 3 mins ago</small>
+                      </CardText>
+                    </CardImgOverlay>
+                  </Card>
                 ))}
-              </GoogleMap>
-            </div>
-          </Col>
+              </Container>
+            </Col>
+            <Col m="auto">
+              <div style={{ width: '100%', height: '80vh', border: '5px solid black' }}>
+                <GoogleMap center={this.state.center} zoom={this.state.zoom}>
+                  {this.state.spaces.map((s, i) => (
+                    <PinInactive key={i} lat={s.loc.lat} lng={s.loc.lng} />
+                  ))}
+                </GoogleMap>
+              </div>
+            </Col>
+          </Row>
         </Container>
       </div>
     );
