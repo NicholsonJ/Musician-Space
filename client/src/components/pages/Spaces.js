@@ -11,9 +11,7 @@ import {
   Input,
   Card,
   CardTitle,
-  CardText,
-  CardImg,
-  CardImgOverlay
+  CardText
 } from 'reactstrap';
 import PinInactive from '../markers/PinInactive';
 
@@ -68,15 +66,13 @@ class Spaces extends Component {
               <h2>List of spaces</h2>
               <Container className="pre-scrollable mt-3" style={{ maxHeight: '75vh' }}>
                 {this.state.spaces.map((s, i) => (
-                  <Card inverse key={i} onClick={e => this.handleClick(e, s)}>
-                    <CardImg width="100%" src="/images/pianoDefault.jpg" alt="Card image cap" />
-                    <CardImgOverlay>
-                      <CardTitle>{s.name}</CardTitle>
-                      <CardText>{s.description}</CardText>
-                      <CardText>
-                        <small className="text-muted">Last updated 3 mins ago</small>
-                      </CardText>
-                    </CardImgOverlay>
+                  <Card key={i} onClick={e => this.handleClick(e, s)}>
+                    <CardTitle>{s.name}</CardTitle>
+                    <CardText>
+                      <small className="text-muted">{s.description}</small>
+                    </CardText>
+
+                    {/* <Button to={'/details/' + s._id}>More Details</Button> */}
                   </Card>
                 ))}
               </Container>

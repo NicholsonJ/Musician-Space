@@ -3,6 +3,8 @@ const Space = require('../models/Space');
 const Comment = require('../models/Comment');
 const router = express.Router();
 const { isLoggedIn } = require('../middlewares');
+const multer = require('multer');
+const uploadCloud = require('../configs/cloudinary.js');
 
 // Route to get all spaces
 router.get('/', (req, res, next) => {
@@ -13,11 +15,22 @@ router.get('/', (req, res, next) => {
     .catch(err => next(err));
 });
 
+//Route to get individual space details
+router.get('/:id', (req, res, next) => {
+  Space.find({ _id: req.params.id })
+    .then(s => {
+      res.json(s);
+    })
+    .catch(err => next(err));
+});
+
 // Route to add a space
-router.post('/', isLoggedIn, (req, res, next) => {
+router.post('/', isLoggedIn, uploadCloud.single('picture'), (req, res, next) => {
   let _user = req.user;
+  const imgPath = req.file.url;
+  const imgName = req.file.originalname;
   let { name, loc, website, price, picture, description } = req.body;
-  Space.create({ name, loc, website, price, picture, description, _user })
+  Space.create({ name, loc, website, price, picture, description, _user, imgPath, imgName })
     .then(space => {
       res.json({
         success: true,

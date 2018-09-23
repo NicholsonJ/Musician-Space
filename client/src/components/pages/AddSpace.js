@@ -17,6 +17,9 @@ class AddSpace extends Component {
         lng: ''
       },
       picture: '',
+      type: '',
+      piano: false,
+      drum: false,
       price: '',
       description: '',
       message: null
@@ -27,23 +30,34 @@ class AddSpace extends Component {
   handleInputChange(stateFieldName, event) {
     let newState = {};
     newState[stateFieldName] = event.target.value;
-    this.setState(newState);
+    if (stateFieldName === 'piano' || stateFieldName === 'drum') {
+      this.setState({
+        [stateFieldName]: !this.state[stateFieldName]
+      });
+    } else {
+      this.setState(newState);
+    }
+    console.log(this.state);
   }
 
   handleClick(e) {
     e.preventDefault();
-    console.log(this.state.name, this.state.description);
+    console.log(this.state);
     let data = {
       name: this.state.name,
       website: this.state.website,
-      picture: this.state.picture,
       loc: {
         lat: this.state.loc.lat,
         lng: this.state.loc.lng
       },
+      picture: this.state.picture,
+      type: this.state.type,
       price: this.state.price,
+      piano: this.state.piano,
+      drum: this.state.drum,
       description: this.state.description
     };
+    console.log(data);
     api
       .postSpaces(data)
       .then(result => {
@@ -57,7 +71,10 @@ class AddSpace extends Component {
             lat: '',
             lng: ''
           },
+          piano: false,
+          drum: false,
           price: '',
+          type: '',
           description: '',
           message: `Your space '${this.state.name}' has been created`
         });
@@ -84,8 +101,11 @@ class AddSpace extends Component {
     });
   }
   render() {
+    const isEnabled =
+      this.state.name.length > 0 && this.state.loc.lat !== '' && this.state.loc.lng !== '';
+    console.log(this.state.type);
     return (
-      <Container className="mt-5">
+      <Container className="mt-5" style={{ maxWidth: '50vw' }}>
         <h1>Add a new musician space</h1>
         <Form className="mt-5">
           <FormGroup row>
@@ -130,6 +150,67 @@ class AddSpace extends Component {
               </Row>
             </Col>
           </FormGroup>
+          <FormGroup tag="fieldset" row>
+            <Label for="type" sm={2}>
+              Type of Space
+            </Label>
+            <Col sm={10} id="type">
+              <Container>
+                <FormGroup check inline>
+                  <Label check>
+                    <Input
+                      type="radio"
+                      name="radio2"
+                      value="practice"
+                      onChange={e => {
+                        this.handleInputChange('type', e);
+                      }}
+                    />{' '}
+                    Practice Room
+                  </Label>
+                </FormGroup>
+                <FormGroup check inline>
+                  <Label check>
+                    <Input
+                      type="radio"
+                      name="radio2"
+                      value="rehearsal"
+                      onChange={e => {
+                        this.handleInputChange('type', e);
+                      }}
+                    />{' '}
+                    Rehearsal Space
+                  </Label>
+                </FormGroup>
+                <FormGroup check inline>
+                  <Label check>
+                    <Input
+                      type="radio"
+                      name="radio2"
+                      value="hall"
+                      onChange={e => {
+                        this.handleInputChange('type', e);
+                      }}
+                    />{' '}
+                    Recording Hall
+                  </Label>
+                </FormGroup>
+                <FormGroup check inline>
+                  <Label check>
+                    <Input
+                      type="radio"
+                      name="radio2"
+                      value="studio"
+                      onChange={e => {
+                        this.handleInputChange('type', e);
+                      }}
+                    />{' '}
+                    Studio Space
+                  </Label>
+                </FormGroup>
+              </Container>
+            </Col>
+          </FormGroup>
           <FormGroup row>
             <Label for="description" sm={2}>
               Description
@@ -158,6 +239,7 @@ class AddSpace extends Component {
                 type="file"
                 name="picture"
                 id="picture"
+                accept="image/*"
                 value={this.state.picture}
                 onChange={e => {
                   this.handleInputChange('picture', e);
@@ -187,10 +269,26 @@ class AddSpace extends Component {
               <FormGroup check>
                 <Container>
                   <Label check className="mr-4">
-                    <Input type="checkbox" id="checkbox2" /> Piano?
+                    <Input
+                      type="checkbox"
+                      id="checkbox2"
+                      value="true"
+                      onChange={e => {
+                        this.handleInputChange('piano', e);
+                      }}
+                    />{' '}
+                    Piano?
                   </Label>
                   <Label check className="ml-4">
-                    <Input type="checkbox" id="checkbox3" /> Drum Kit?
+                    <Input
+                      type="checkbox"
+                      id="checkbox3"
+                      value="true"
+                      onChange={e => {
+                        this.handleInputChange('drum', e);
+                      }}
+                    />{' '}
+                    Drum Kit?
                   </Label>
                 </Container>
               </FormGroup>
@@ -198,7 +296,9 @@ class AddSpace extends Component {
           </FormGroup>
           <FormGroup check row>
             <Col sm={{ size: 10, offset: 2 }}>
-              <Button onClick={e => this.handleClick(e)}>Submit</Button>
+              <Button onClick={e => this.handleClick(e)} disabled={!isEnabled}>
+                Submit
+              </Button>
             </Col>
           </FormGroup>
           <div

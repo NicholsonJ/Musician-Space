@@ -1,24 +1,46 @@
 import React, { Component } from 'react';
-import { Form, Button, InputGroup, InputGroupAddon, Container, Input } from 'reactstrap';
+import { Form, Button, InputGroup, InputGroupAddon, Row, Container, Input } from 'reactstrap';
+import LocationSearchInput from './LocationSearch';
 
 class Home extends Component {
-  // constructor(props) {
-  //   super(props)
-  //   this.state = {
-  //   }
-  // }
+  constructor(props) {
+    super(props);
+    this.state = {
+      loc: {
+        lat: '',
+        lng: ''
+      },
+      address: ''
+    };
+  }
+  handleSelect(latLng, address) {
+    console.log('address: ', address);
+    console.log(latLng);
+
+    this.setState({
+      loc: {
+        lat: latLng.lat,
+        lng: latLng.lng
+      },
+      address
+    });
+  }
   render() {
     return (
-      <Container className="Home h-100">
+      <Container className="">
         <h2>Home</h2>
-        <Form className="row h-100 justify-content-center align-items-center">
-          <InputGroup className="form-group">
-            <Input placeholder="Where do you need a space?" className="form-control" />
-            <InputGroupAddon addonType="append">
-              <Button color="success">Let's go!</Button>
-            </InputGroupAddon>
-          </InputGroup>
-        </Form>
+        <Row className="justify-content-center align-items-center">
+          <Form className="">
+            <InputGroup className="form-group">
+              <LocationSearchInput
+                className="form-control justify-content-center align-items-center"
+                onSelect={this.handleSelect}
+                id="address"
+                style={{ border: '1px solid black' }}
+              />
+            </InputGroup>
+          </Form>
+        </Row>
       </Container>
     );
   }

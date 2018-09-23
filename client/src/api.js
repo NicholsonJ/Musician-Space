@@ -27,6 +27,15 @@ export default {
       .catch(errHandler);
   },
 
+  getDetail(id) {
+    console.log('here');
+    const spaceDetail = '/spaces/' + id;
+    return service
+      .get(spaceDetail)
+      .then(res => res.data)
+      .catch(errHandler);
+  },
+
   getSecret() {
     return service
       .get('/secret')
