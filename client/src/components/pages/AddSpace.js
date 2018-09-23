@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-// import { Route, Switch, NavLink, Link } from 'react-router-dom';
 import api from '../../api';
-// import './AddCountry.css';
 import { Col, Row, Button, Container, Form, FormGroup, Label, Input } from 'reactstrap';
 import LocationSearchInput from './LocationSearch';
 

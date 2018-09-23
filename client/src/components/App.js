@@ -27,7 +27,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <Link to="/">Home</Link>
+          {/* <Link to="/">Home</Link> */}
           <Link to="/spaces">Spaces</Link>
           {api.isLoggedIn() && <Link to="/add-space">Add Space</Link>}
           {!api.isLoggedIn() && <Link to="/signup">Signup</Link>}

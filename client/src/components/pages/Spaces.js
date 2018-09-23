@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import api from '../../api';
 import GoogleMap from 'google-map-react';
+import { Link } from 'react-router-dom';
 import {
   Form,
   FormGroup,
@@ -9,20 +10,24 @@ import {
   Col,
   Label,
   Input,
+  InputGroup,
   Card,
   CardTitle,
   CardText
 } from 'reactstrap';
 import PinInactive from '../markers/PinInactive';
+import LocationSearchInput from './LocationSearch';
 
 class Spaces extends Component {
   constructor(props) {
     super(props);
     this.state = {
       spaces: [],
-      center: { lat: 52.506, lng: 13.37 },
-      zoom: 2
+      center: { lat: '', lng: '' },
+      zoom: 10,
+      address: ''
     };
+    this.handleSelect = this.handleSelect.bind(this);
   }
   componentDidMount() {
     api
@@ -45,7 +50,39 @@ class Spaces extends Component {
     });
   }
 
+  handleSelect(latLng, address) {
+    console.log('address: ', address);
+    console.log(latLng);
+
+    this.setState({
+      center: {
+        lat: latLng.lat,
+        lng: latLng.lng
+      },
+      address
+    });
+  }
+
   render() {
+    if (this.state.center.lat === '') {
+      return (
+        <Container className="">
+          <Row className="justify-content-center align-items-center">
+            <Form className="vertical-center">
+              <InputGroup className="form-group">
+                <LocationSearchInput
+                  className="form-control justify-content-center align-items-center"
+                  onSelect={this.handleSelect}
+                  id="address"
+                  style={{ border: '1px solid black' }}
+                />
+              </InputGroup>
+            </Form>
+          </Row>
+        </Container>
+      );
+    }
+
     return (
       <div className="Spaces">
         <Form>
@@ -66,13 +103,13 @@ class Spaces extends Component {
               <h2>List of spaces</h2>
               <Container className="pre-scrollable mt-3" style={{ maxHeight: '75vh' }}>
                 {this.state.spaces.map((s, i) => (
-                  <Card key={i} onClick={e => this.handleClick(e, s)}>
+                  <Card key={i} onClick={e => this.handleClick(e, s)} style={{ minHeight: '140px' }}>
                     <CardTitle>{s.name}</CardTitle>
                     <CardText>
                       <small className="text-muted">{s.description}</small>
                     </CardText>
 
-                    {/* <Button to={'/details/' + s._id}>More Details</Button> */}
+                    <Link to={'/details/' + s._id}>More Details</Link>
                   </Card>
                 ))}
               </Container>

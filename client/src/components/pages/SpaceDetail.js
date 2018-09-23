@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import api from '../../api';
+import { BrowserRouter } from 'react-router-dom';
+import { Button } from 'reactstrap';
 
 class SpaceDetail extends Component {
   constructor(props) {
@@ -7,6 +9,7 @@ class SpaceDetail extends Component {
     this.state = {
       space: {}
     };
+    this.handleBack = this.handleBack.bind(this);
   }
 
   componentDidMount() {
@@ -21,12 +24,18 @@ class SpaceDetail extends Component {
       .catch(err => console.log(err));
   }
 
+  handleBack() {
+    this.props.history.goBack();
+  }
+
   render() {
     console.log(this.state.space.name);
+    console.log(BrowserRouter);
     return (
       <div className="spaceDetail">
         <h2>{this.state.space.name}</h2>
         <p>{this.state.space.description} </p>
+        <Button onClick={this.handleBack}>Head Back</Button>
       </div>
     );
   }
