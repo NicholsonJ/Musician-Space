@@ -10,15 +10,14 @@ import {
   Col,
   Label,
   Input,
-  InputGroup,
   Card,
   CardTitle,
   CardText,
   UncontrolledCarousel
 } from 'reactstrap';
 import PinInactive from '../markers/PinInactive';
-import LocationSearchInput from './LocationSearch';
-import SpaceDetail from './SpaceDetail';
+import LocationSearchInput from './components/LocationSearch';
+import SpaceDetail from './components/SpaceDetail';
 
 const items = [
   {

@@ -5,7 +5,7 @@ const User = require('../models/User');
 
 router.get('/profile', isLoggedIn, (req, res, next) => {
   console.log(req.user);
-  User.find({ _id: req.user._id })
+  User.findById(req.user._id)
     .then(user => {
       res.json(user);
     })

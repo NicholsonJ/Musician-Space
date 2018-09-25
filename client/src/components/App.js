@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Link, Switch } from 'react-router-dom';
-import Home from './pages/Home';
+// import Home from './pages/Home';
 import Spaces from './pages/Spaces';
 import AddSpace from './pages/AddSpace';
 import Profile from './pages/Profile';
@@ -8,7 +8,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import api from '../api';
 import './App.css';
-import SpaceDetail from './pages/SpaceDetail';
+// import SpaceDetail from './pages/components/SpaceDetail';
 // import LocationSearchInput from './pages/LocationSearch';
 
 class App extends Component {
@@ -33,7 +33,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           {/* <Link to="/">Home</Link> */}
-          <Link to="/spaces">Spaces</Link>
+          <Link to="/">Spaces</Link>
           {api.isLoggedIn() && <Link to="/add-space">Add Space</Link>}
           {!api.isLoggedIn() && <Link to="/signup">Signup</Link>}
           {!api.isLoggedIn() && <Link to="/login">Login</Link>}
@@ -45,9 +45,9 @@ class App extends Component {
           <Link to="/profile">Profile</Link>
         </header>
         <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/spaces" component={Spaces} />
-          <Route path="/details/:id" component={SpaceDetail} />
+          <Route path="/" exact component={Spaces} />
+          {/* <Route path="/spaces" component={Spaces} /> */}
+          {/* <Route path="/details/:id" component={SpaceDetail} /> */}
           <Route path="/add-space" component={AddSpace} />
           <Route path="/signup" component={Signup} />
           <Route path="/login" component={Login} />

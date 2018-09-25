@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import api from '../../api';
 import { Col, Row, Button, Container, Form, FormGroup, Label, Input } from 'reactstrap';
-import LocationSearchInput from './LocationSearch';
+import LocationSearchInput from './components/LocationSearch';
 
 class AddSpace extends Component {
   constructor(props) {

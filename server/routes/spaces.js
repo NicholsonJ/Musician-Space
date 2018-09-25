@@ -17,7 +17,7 @@ router.get('/', (req, res, next) => {
           type: 'Point',
           coordinates: [lng, lat]
         },
-        $maxDistance: 100000 // 1000km
+        $maxDistance: 10000000 // 1000km
         // $minDistance: 1
       }
     }

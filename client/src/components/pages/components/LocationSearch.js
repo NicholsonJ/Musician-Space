@@ -34,7 +34,8 @@ class LocationSearchInput extends React.Component {
             <Input
               className="mw-100"
               {...getInputProps({
-                placeholder: 'Where can we find the space?',
+                placeholder: 'Where would you like a space?',
+                style: { textAlign: 'center' },
                 type: 'text'
               })}
             />
