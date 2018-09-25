@@ -23,7 +23,7 @@ const spaceSchema = new mongoose.Schema(
     },
     description: String,
     price: String,
-    picture: [String],
+    picture: [{}],
     piano: Boolean,
     drum: Boolean,
     deleteRequests: {

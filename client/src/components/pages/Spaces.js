@@ -181,7 +181,7 @@ class Spaces extends Component {
             </Col>
             {!this.state.isHidden && (
               <Col>
-                <UncontrolledCarousel items={items} />
+                <UncontrolledCarousel items={this.state.card.picture} />
                 <SpaceDetail space={this.state.card} onClick={e => this.detailsClick(e)} />
               </Col>
             )}

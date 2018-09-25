@@ -64,16 +64,16 @@ router.get('/:id', (req, res, next) => {
 // Route to add a space
 router.post('/', isLoggedIn, parser.single('picture'), (req, res, next) => {
   let _user = req.user;
-  console.log('req.file: ', req.file);
   const imgPath = req.file.url;
   const imgName = req.file.originalname;
   let { name, lat, lng, website, price, description } = req.body;
+  const picture = [{ src: imgPath, altText: '', caption: '' }];
   Space.create({
     name,
     loc: { type: 'Point', coordinates: [lng, lat] },
     website,
     price,
-    picture: [imgPath],
+    picture,
     description,
     _user,
     imgPath,

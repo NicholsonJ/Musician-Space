@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import api from '../../api';
-import { Col, Row, Button, Container, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Col, Row, Button, Container, Form, FormGroup, Label, Alert, Input } from 'reactstrap';
 import LocationSearchInput from './components/LocationSearch';
 
 class AddSpace extends Component {
@@ -20,6 +20,7 @@ class AddSpace extends Component {
       drum: false,
       price: '',
       description: '',
+      on: false,
       message: null
     };
     this.handleSelect = this.handleSelect.bind(this);
@@ -35,7 +36,6 @@ class AddSpace extends Component {
     } else {
       this.setState(newState);
     }
-    console.log(this.state);
   }
 
   handleFile(e) {
@@ -80,6 +80,7 @@ class AddSpace extends Component {
           price: '',
           type: '',
           description: '',
+          on: false,
           message: `Your space '${this.state.name}' has been created`
         });
         setTimeout(() => {
@@ -113,15 +114,9 @@ class AddSpace extends Component {
     return (
       <Container className="mt-5" style={{ maxWidth: '50vw' }}>
         <h1>Add a new musician space</h1>
-        <div
-          style={{
-            margin: 10,
-            backgroundColor: 'red',
-            display: this.state.message ? 'block' : 'none'
-          }}
-        >
+        <Alert color="success" isOpen={this.state.on}>
           {this.state.message}
-        </div>
+        </Alert>
         <Form className="mt-5" encType="multipart/form-data" onSubmit={e => this.handleClick(e)}>
           <FormGroup row>
             <Label for="exampleEmail" sm={2}>
