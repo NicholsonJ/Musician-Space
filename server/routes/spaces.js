@@ -5,6 +5,7 @@ const router = express.Router();
 const { isLoggedIn } = require('../middlewares');
 const multer = require('multer');
 const uploadCloud = require('../configs/cloudinary.js');
+const Like = require('../models/Like');
 
 // Route to get all spaces
 router.get('/', (req, res, next) => {
@@ -70,6 +71,23 @@ router.delete('/:id/delete', isLoggedIn, (req, res, next) => {
       res.json({
         success: true,
         s
+      });
+    })
+    .catch(err => next(err));
+});
+
+//Route to like a space
+router.post('/like', isLoggedIn, (req, res, next) => {
+  let _user = req.user;
+  let _space = req.body;
+  Like.create({
+    _user,
+    _space
+  })
+    .then(like => {
+      res.json({
+        success: true,
+        like
       });
     })
     .catch(err => next(err));

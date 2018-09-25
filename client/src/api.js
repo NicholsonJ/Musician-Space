@@ -61,6 +61,13 @@ export default {
       .catch(errHandler);
   },
 
+  createLike(_space) {
+    return service
+      .post('/spaces/like', _space)
+      .then(res => res.data)
+      .catch(errHandler);
+  },
+
   signup(userInfo) {
     return service
       .post('/signup', userInfo)

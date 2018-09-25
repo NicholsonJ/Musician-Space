@@ -32,6 +32,7 @@ class LocationSearchInput extends React.Component {
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
           <Col>
             <Input
+              className="mw-100"
               {...getInputProps({
                 placeholder: 'Where can we find the space?',
                 type: 'text'
@@ -43,8 +44,8 @@ class LocationSearchInput extends React.Component {
                 const className = suggestion.active ? 'suggestion-item--active' : 'suggestion-item';
                 // inline style for demonstration purpose
                 const style = suggestion.active
-                  ? { backgroundColor: '#fafafa', cursor: 'pointer' }
-                  : { backgroundColor: '#ffffff', cursor: 'pointer' };
+                  ? { backgroundColor: 'orange', cursor: 'pointer', color: 'black' }
+                  : { backgroundColor: '#ffffff', cursor: 'pointer', color: 'blue' };
                 return (
                   <div
                     {...getSuggestionItemProps(suggestion, {
