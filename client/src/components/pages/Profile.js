@@ -23,7 +23,7 @@ class Profile extends Component {
     return (
       <div className="Profile">
         <h2>Profile</h2>
-        {this.state.rooms}
+        {this.state.profile.likes}
       </div>
     );
   }

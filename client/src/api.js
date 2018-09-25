@@ -23,7 +23,7 @@ export default {
   postSpaces(data) {
     let formData = new FormData();
     console.log('data: ', data);
-    formData.append('picture', [data.picture]);
+    formData.append('picture', data.picture);
     formData.append('name', data.name);
     formData.append('website', data.website);
     formData.append('lat', data.lat);
@@ -36,7 +36,7 @@ export default {
 
     console.log('formData: ', formData);
     return service
-      .post('/spaces', formData, {
+      .post('/spaces/', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }

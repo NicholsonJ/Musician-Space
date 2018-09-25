@@ -1,8 +1,8 @@
 require('dotenv').config();
 
 const cloudinary = require('cloudinary');
-const cloudinaryStorage = require('multer-storage-cloudinary');
-const multer = require('multer');
+
+// const uploadCloud = multer({ storage: storage });
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_NAME,
@@ -10,19 +10,18 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_SECRET
 });
 
-var storage = cloudinaryStorage({
-  cloudinary: cloudinary,
-  folder: 'practiceRooms',
-  allowedFormats: ['jpg', 'png'],
-  // filename: function(req, file, cb) {
-  //   cb(null, 'room');
-  // },
-  transformation: [
-    {
-      angle: 0
-    }
-  ]
-});
+// var storage = cloudinaryStorage({
+//   cloudinary: cloudinary,
+//   folder: 'practiceRooms',
+//   allowedFormats: ['jpg', 'png', 'jpeg'],
+//   // filename: function(req, file, cb) {
+//   //   cb(null, 'room');
+//   // },
+//   transformation: [
+//     {
+//       angle: 0
+//     }
+//   ]
+// });
 
-const uploadCloud = multer({ storage: storage });
-module.exports = uploadCloud;
+module.exports = cloudinary;

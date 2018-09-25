@@ -86,7 +86,9 @@ class AddSpace extends Component {
           this.setState({
             message: null
           });
+          this.props.history.push('/');
         }, 2000);
+        // Redirect to the home page)
       })
       .catch(err => {
         console.log('ERROR');
@@ -111,6 +113,15 @@ class AddSpace extends Component {
     return (
       <Container className="mt-5" style={{ maxWidth: '50vw' }}>
         <h1>Add a new musician space</h1>
+        <div
+          style={{
+            margin: 10,
+            backgroundColor: 'red',
+            display: this.state.message ? 'block' : 'none'
+          }}
+        >
+          {this.state.message}
+        </div>
         <Form className="mt-5" encType="multipart/form-data" onSubmit={e => this.handleClick(e)}>
           <FormGroup row>
             <Label for="exampleEmail" sm={2}>
@@ -304,15 +315,6 @@ class AddSpace extends Component {
               </Button>
             </Col>
           </FormGroup>
-          <div
-            style={{
-              margin: 10,
-              backgroundColor: 'red',
-              display: this.state.message ? 'block' : 'none'
-            }}
-          >
-            {this.state.message}
-          </div>
         </Form>
       </Container>
     );

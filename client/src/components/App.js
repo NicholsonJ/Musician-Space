@@ -8,6 +8,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import api from '../api';
 import './App.css';
+
 // import SpaceDetail from './pages/components/SpaceDetail';
 // import LocationSearchInput from './pages/LocationSearch';
 

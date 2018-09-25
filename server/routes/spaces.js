@@ -3,10 +3,34 @@ const Space = require('../models/Space');
 const Comment = require('../models/Comment');
 const router = express.Router();
 const { isLoggedIn } = require('../middlewares');
-const multer = require('multer');
-const uploadCloud = require('../configs/cloudinary.js');
 const Like = require('../models/Like');
+// const uploadCloud = multer({ storage: storage });
+const cloudinary = require('cloudinary');
+const cloudinaryStorage = require('multer-storage-cloudinary');
+const multer = require('multer');
 
+var storage = cloudinaryStorage({
+  cloudinary,
+  folder: 'practice-rooms',
+  allowedFormats: ['jpg', 'png', 'jpeg'],
+  transformation: [
+    {
+      angle: 0
+    }
+  ]
+});
+
+const parser = multer({ storage });
+
+// router.post('/first-user/pictures', parser.single('picture'), (req, res, next) => {
+//   User.findOneAndUpdate({}, { pictureUrl: req.file.url })
+//     .then(() => {
+//       res.json({
+//         success: true,
+//         pictureUrl: req.file.url
+//       })
+//     })
+// });
 // Route to get all spaces
 router.get('/', (req, res, next) => {
   let { lat, lng } = req.query;
@@ -38,18 +62,18 @@ router.get('/:id', (req, res, next) => {
 });
 
 // Route to add a space
-router.post('/', isLoggedIn, uploadCloud.single('picture'), (req, res, next) => {
+router.post('/', isLoggedIn, parser.single('picture'), (req, res, next) => {
   let _user = req.user;
   console.log('req.file: ', req.file);
   const imgPath = req.file.url;
   const imgName = req.file.originalname;
-  let { name, lat, lng, website, price, picture, description } = req.body;
+  let { name, lat, lng, website, price, description } = req.body;
   Space.create({
     name,
     loc: { type: 'Point', coordinates: [lng, lat] },
     website,
     price,
-    picture,
+    picture: [imgPath],
     description,
     _user,
     imgPath,
