@@ -5,24 +5,26 @@ import api from '../../api';
 
 class Secret extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      secret: null
-    }
+      rooms: null
+    };
   }
   componentDidMount(props) {
-    api.getSecret()
-      .then(data => {
-        this.setState({
-          secret: data.secret
-        })
-      })
+    api.getSecret().then(data => {
+      this.setState({
+        secret: data.secret
+      });
+    });
   }
   render() {
     return (
       <div className="Secret">
-        <h2>Secret</h2>
-        {this.state.secret}
+        <h2>
+          {}
+          Profile
+        </h2>
+        {this.state.rooms}
       </div>
     );
   }

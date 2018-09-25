@@ -14,9 +14,9 @@ var storage = cloudinaryStorage({
   cloudinary: cloudinary,
   folder: 'practiceRooms',
   allowedFormats: ['jpg', 'png'],
-  filename: function(req, file, cb) {
-    cb(null, 'room');
-  },
+  // filename: function(req, file, cb) {
+  //   cb(null, 'room');
+  // },
   transformation: [
     {
       angle: 0

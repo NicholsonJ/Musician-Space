@@ -12,8 +12,9 @@ const spaceSchema = new mongoose.Schema(
         type: String,
         default: 'Point'
       },
-      lat: String,
-      lng: String
+      coordinates: { type: [Number], default: [0, 0] } // [lng,lat]
+      // lat: String,
+      // lng: String
     },
     website: String,
     type: {
@@ -42,6 +43,8 @@ const spaceSchema = new mongoose.Schema(
   }
 );
 
-const Space = mongoose.model('Space', spaceSchema);
+spaceSchema.index({ loc: '2dsphere' });
 
+const Space = mongoose.model('Space', spaceSchema);
+Space.ensureIndexes();
 module.exports = Space;

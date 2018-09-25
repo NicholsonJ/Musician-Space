@@ -38,16 +38,22 @@ class AddSpace extends Component {
     console.log(this.state);
   }
 
+  handleFile(e) {
+    console.log('handleChange');
+    console.log('DEBUG e.target.files[0]', e.target.files[0]);
+    this.setState({
+      picture: e.target.files[0]
+    });
+  }
+
   handleClick(e) {
     e.preventDefault();
     console.log(this.state);
     let data = {
       name: this.state.name,
       website: this.state.website,
-      loc: {
-        lat: this.state.loc.lat,
-        lng: this.state.loc.lng
-      },
+      lat: this.state.loc.lat,
+      lng: this.state.loc.lng,
       picture: this.state.picture,
       type: this.state.type,
       price: this.state.price,
@@ -105,7 +111,7 @@ class AddSpace extends Component {
     return (
       <Container className="mt-5" style={{ maxWidth: '50vw' }}>
         <h1>Add a new musician space</h1>
-        <Form className="mt-5">
+        <Form className="mt-5" encType="multipart/form-data" onSubmit={e => this.handleClick(e)}>
           <FormGroup row>
             <Label for="exampleEmail" sm={2}>
               Name
@@ -238,9 +244,8 @@ class AddSpace extends Component {
                 name="picture"
                 id="picture"
                 accept="image/*"
-                value={this.state.picture}
                 onChange={e => {
-                  this.handleInputChange('picture', e);
+                  this.handleFile(e);
                 }}
               />
             </Col>
@@ -294,7 +299,7 @@ class AddSpace extends Component {
           </FormGroup>
           <FormGroup check row>
             <Col sm={{ size: 10, offset: 2 }}>
-              <Button onClick={e => this.handleClick(e)} disabled={!isEnabled}>
+              <Button type="submit" disabled={!isEnabled}>
                 Submit
               </Button>
             </Col>

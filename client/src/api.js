@@ -13,16 +13,34 @@ const errHandler = err => {
 export default {
   service: service,
 
-  getSpaces() {
+  getSpaces(lat, lng) {
     return service
-      .get('/spaces')
+      .get('/spaces/?lat=' + lat + '&lng=' + lng)
       .then(res => res.data)
       .catch(errHandler);
   },
 
   postSpaces(data) {
+    let formData = new FormData();
+    console.log('data: ', data);
+    formData.append('picture', data.picture);
+    formData.append('name', data.name);
+    formData.append('website', data.website);
+    formData.append('lat', data.lat);
+    formData.append('lng', data.lng);
+    formData.append('type', data.type);
+    formData.append('price', data.price);
+    formData.append('piano', data.piano);
+    formData.append('drum', data.drum);
+    formData.append('description', data.description);
+
+    console.log('formData: ', formData);
     return service
-      .post('/spaces', data)
+      .post('/spaces', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
       .then(res => res.data)
       .catch(errHandler);
   },
@@ -82,18 +100,14 @@ export default {
 
   isLoggedIn() {
     return localStorage.getItem('user') != null;
-  },
-
-  addPicture(file) {
-    const formData = new FormData();
-    formData.append('picture', file);
-    return service
-      .post('/users/first-user/pictures', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      })
-      .then(res => res.data)
-      .catch(errHandler);
   }
+
+  // addPicture(file) {
+  //   const formData = new FormData();
+  //   formData.append('picture', file);
+  //   return service
+  //     .post('/users/first-user/pictures',
+  //     .then(res => res.data)
+  //     .catch(errHandler);
+  // }
 };

@@ -8,7 +8,19 @@ const uploadCloud = require('../configs/cloudinary.js');
 
 // Route to get all spaces
 router.get('/', (req, res, next) => {
-  Space.find()
+  let { lat, lng } = req.query;
+  Space.find({
+    loc: {
+      $near: {
+        $geometry: {
+          type: 'Point',
+          coordinates: [lng, lat]
+        },
+        $maxDistance: 42000000 // 1000km
+        // $minDistance: 1
+      }
+    }
+  })
     .then(spaces => {
       res.json(spaces);
     })
@@ -27,10 +39,21 @@ router.get('/:id', (req, res, next) => {
 // Route to add a space
 router.post('/', isLoggedIn, uploadCloud.single('picture'), (req, res, next) => {
   let _user = req.user;
+  console.log('req.file: ', req.file);
   const imgPath = req.file.url;
   const imgName = req.file.originalname;
-  let { name, loc, website, price, picture, description } = req.body;
-  Space.create({ name, loc, website, price, picture, description, _user, imgPath, imgName })
+  let { name, lat, lng, website, price, picture, description } = req.body;
+  Space.create({
+    name,
+    loc: { type: 'Point', coordinates: [lng, lat] },
+    website,
+    price,
+    picture,
+    description,
+    _user,
+    imgPath,
+    imgName
+  })
     .then(space => {
       res.json({
         success: true,

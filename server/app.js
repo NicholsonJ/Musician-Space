@@ -1,4 +1,5 @@
 require('dotenv').config();
+require('./configs/cloudinary');
 
 const bodyParser = require('body-parser');
 const cors = require('cors');
