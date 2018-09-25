@@ -3,12 +3,13 @@ import { Route, Link, Switch } from 'react-router-dom';
 import Home from './pages/Home';
 import Spaces from './pages/Spaces';
 import AddSpace from './pages/AddSpace';
-import Secret from './pages/Secret';
+import Profile from './pages/Profile';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import api from '../api';
 import './App.css';
 import SpaceDetail from './pages/SpaceDetail';
+// import LocationSearchInput from './pages/LocationSearch';
 
 class App extends Component {
   constructor(props) {
@@ -16,11 +17,15 @@ class App extends Component {
     this.state = {
       spaces: []
     };
-    // api.loadUser();
+    // this.handleSelect = this.handleSelect.bind(this);
   }
 
   handleLogoutClick(e) {
     api.logout();
+  }
+
+  handleSelect(latLng, address) {
+    console.log(latLng, address);
   }
 
   render() {
@@ -37,7 +42,7 @@ class App extends Component {
               Logout
             </Link>
           )}
-          <Link to="/secret">Secret</Link>
+          <Link to="/profile">Profile</Link>
         </header>
         <Switch>
           <Route path="/" exact component={Home} />
@@ -46,7 +51,7 @@ class App extends Component {
           <Route path="/add-space" component={AddSpace} />
           <Route path="/signup" component={Signup} />
           <Route path="/login" component={Login} />
-          <Route path="/secret" component={Secret} />
+          <Route path="/profile" component={Profile} />
           <Route render={() => <h2>404</h2>} />
         </Switch>
       </div>

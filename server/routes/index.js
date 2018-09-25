@@ -1,19 +1,15 @@
 const express = require('express');
 const { isLoggedIn } = require('../middlewares');
 const router = express.Router();
+const User = require('../models/User');
 
-router.get('/secret', isLoggedIn, (req, res, next) => {
-  res.json({
-    secret: 42,
-    user: req.user
-  });
-});
-
-router.get('/profile', (req, res, next) => {
+router.get('/profile', isLoggedIn, (req, res, next) => {
+  console.log(req.user);
   User.find({ _id: req.user._id })
-    .then(s => {
-      res.json(s);
+    .then(user => {
+      res.json(user);
     })
     .catch(err => next(err));
 });
+
 module.exports = router;

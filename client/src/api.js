@@ -54,9 +54,9 @@ export default {
       .catch(errHandler);
   },
 
-  getSecret() {
+  getProfile() {
     return service
-      .get('/secret')
+      .get('/profile')
       .then(res => res.data)
       .catch(errHandler);
   },
