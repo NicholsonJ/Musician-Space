@@ -91,7 +91,7 @@ class Spaces extends Component {
   render() {
     if (this.state.center.lat === 0 && this.state.center.lng === 0) {
       return (
-        <Container style={{ padding: '10px 300px' }}>
+        <Container style={{ padding: '10px 20vw' }}>
           <Row className="justify-content-center align-items-center vertical-center">
             <LocationSearchInput
               className="form-control input-lg d-flex justify-content-center align-items-center"

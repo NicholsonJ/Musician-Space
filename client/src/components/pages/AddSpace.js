@@ -34,13 +34,7 @@ class AddSpace extends Component {
   handleInputChange(stateFieldName, event) {
     let newState = {};
     newState[stateFieldName] = event.target.value;
-    if (stateFieldName === 'piano' || stateFieldName === 'drum' || stateFieldName === 'price') {
-      this.setState({
-        [stateFieldName]: !this.state[stateFieldName]
-      });
-    } else {
-      this.setState(newState);
-    }
+    this.setState(newState);
   }
 
   handleFile(e) {
@@ -98,6 +92,11 @@ class AddSpace extends Component {
       type: { ...this.state.type, [e.target.value]: !this.state.type[e.target.value] }
     });
   }
+  handleButtonClick(e) {
+    this.setState({
+      [e.target.name]: !this.state[e.target.name]
+    });
+  }
   getTextStyle(value) {
     if (value) {
       return {
@@ -113,7 +112,7 @@ class AddSpace extends Component {
     const isEnabled =
       this.state.name.length > 0 && this.state.loc.lat !== '' && this.state.loc.lng !== '';
     return (
-      <Container className="mt-5" style={{ maxWidth: '50vw' }}>
+      <Container className="mt-5" style={{ maxWidth: '1000px' }}>
         <h1>Add a new musician space</h1>
         <Alert color="success" isOpen={this.state.on}>
           {this.state.message}
@@ -156,14 +155,19 @@ class AddSpace extends Component {
             </Label>
             <Col sm={10}>
               <Row>
-                <LocationSearchInput onSelect={this.handleSelect} id="address" />
-                {this.state.address && <span>Your address: {this.state.address}</span>}
+                <LocationSearchInput
+                  onSelect={this.handleSelect}
+                  id="address"
+                  address={this.state.address}
+                />
               </Row>
+
+              {this.state.address && <Alert color="danger">Your address: {this.state.address}</Alert>}
             </Col>
           </FormGroup>
           <FormGroup tag="fieldset" row>
-            <span className="btn-group justify-content-center" role="group">
-              <Col sm={10}>
+            <span className="btn-group " role="group">
+              <Col className="d-flex justify-content-center">
                 <Button
                   type="button"
                   style={this.getTextStyle(this.state.type.practice)}
@@ -246,42 +250,50 @@ class AddSpace extends Component {
           </FormGroup>
 
           <FormGroup row>
-            <Col sm={{ size: 10 }}>
+            <Col>
               <FormGroup check className="justify-content-center">
                 <Container>
-                  <Label check className="mr-4">
-                    <Input
-                      type="checkbox"
-                      id="checkbox2"
+                  <Label check className="">
+                    <Button
+                      type="button"
+                      name="piano"
+                      style={this.getTextStyle(this.state.piano)}
                       value="true"
-                      onChange={e => {
-                        this.handleInputChange('piano', e);
+                      onClick={e => {
+                        this.handleButtonClick(e);
                       }}
-                    />{' '}
-                    Piano?
+                    >
+                      Piano?
+                    </Button>
                   </Label>
-                  <Label check className="ml-4">
-                    <Input
-                      type="checkbox"
-                      id="checkbox3"
+                  <Label check className="">
+                    <Button
+                      type="button"
+                      name="drum"
+                      style={this.getTextStyle(this.state.drum)}
                       value="true"
-                      onChange={e => {
-                        this.handleInputChange('drum', e);
+                      onClick={e => {
+                        this.handleButtonClick(e);
                       }}
-                    />{' '}
-                    Drum Kit?
+                    >
+                      {' '}
+                      Drum Kit?
+                    </Button>
                   </Label>
                   <br />
-                  <Label check className="mr-4">
-                    <Input
-                      type="checkbox"
-                      id="checkbox1"
+
+                  <Label check className="mt-3">
+                    <Button
+                      type="button"
+                      style={this.getTextStyle(this.state.price)}
+                      name="price"
                       value="true"
-                      onChange={e => {
-                        this.handleInputChange('price', e);
+                      onClick={e => {
+                        this.handleButtonClick(e);
                       }}
-                    />{' '}
-                    Is there a charge for the space?
+                    >
+                      Is there a charge for the space?
+                    </Button>
                   </Label>
                   {this.state.price && (
                     <Alert color="warning">
@@ -293,7 +305,7 @@ class AddSpace extends Component {
             </Col>
           </FormGroup>
           <FormGroup check row>
-            <Col sm={{ size: 10, offset: 2 }}>
+            <Col>
               <Button type="submit" disabled={!isEnabled}>
                 Submit
               </Button>

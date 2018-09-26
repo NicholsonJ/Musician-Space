@@ -17,6 +17,7 @@ class LocationSearchInput extends React.Component {
   };
 
   handleSelect = address => {
+    this.state.address = address;
     geocodeByAddress(address)
       .then(results => getLatLng(results[0]))
       .then(latLng => this.props.onSelect(latLng, address))
@@ -35,7 +36,7 @@ class LocationSearchInput extends React.Component {
               className="mw-100"
               {...getInputProps({
                 placeholder: 'Where would you like a space?',
-                style: { textAlign: 'center' },
+
                 type: 'text'
               })}
             />
