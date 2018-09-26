@@ -15,10 +15,15 @@ class AddSpace extends Component {
         lng: ''
       },
       picture: '',
-      type: '',
+      type: {
+        practice: false,
+        rehearsal: false,
+        studio: false,
+        hall: false
+      },
       piano: false,
       drum: false,
-      price: '',
+      price: false,
       description: '',
       on: false,
       message: null
@@ -29,7 +34,7 @@ class AddSpace extends Component {
   handleInputChange(stateFieldName, event) {
     let newState = {};
     newState[stateFieldName] = event.target.value;
-    if (stateFieldName === 'piano' || stateFieldName === 'drum') {
+    if (stateFieldName === 'piano' || stateFieldName === 'drum' || stateFieldName === 'price') {
       this.setState({
         [stateFieldName]: !this.state[stateFieldName]
       });
@@ -39,8 +44,6 @@ class AddSpace extends Component {
   }
 
   handleFile(e) {
-    console.log('handleChange');
-    console.log('DEBUG e.target.files[0]', e.target.files[0]);
     this.setState({
       picture: e.target.files[0]
     });
@@ -67,20 +70,7 @@ class AddSpace extends Component {
       .then(result => {
         console.log('SUCCESS!');
         this.setState({
-          name: '',
-          address: '',
-          website: '',
-          picture: '',
-          loc: {
-            lat: '',
-            lng: ''
-          },
-          piano: false,
-          drum: false,
-          price: '',
-          type: '',
-          description: '',
-          on: false,
+          on: true,
           message: `Your space '${this.state.name}' has been created`
         });
         setTimeout(() => {
@@ -89,16 +79,12 @@ class AddSpace extends Component {
           });
           this.props.history.push('/');
         }, 2000);
-        // Redirect to the home page)
       })
       .catch(err => {
         console.log('ERROR');
       });
   }
   handleSelect(latLng, address) {
-    console.log('address: ', address);
-    console.log(latLng);
-
     this.setState({
       loc: {
         lat: latLng.lat,
@@ -107,10 +93,25 @@ class AddSpace extends Component {
       address
     });
   }
+  handleTypeClick(e) {
+    this.setState({
+      type: { ...this.state.type, [e.target.value]: !this.state.type[e.target.value] }
+    });
+  }
+  getTextStyle(value) {
+    if (value) {
+      return {
+        backgroundColor: 'blue'
+      };
+    } else {
+      return {
+        backgroundColor: 'green'
+      };
+    }
+  }
   render() {
     const isEnabled =
       this.state.name.length > 0 && this.state.loc.lat !== '' && this.state.loc.lng !== '';
-    console.log(this.state.type);
     return (
       <Container className="mt-5" style={{ maxWidth: '50vw' }}>
         <h1>Add a new musician space</h1>
@@ -161,65 +162,52 @@ class AddSpace extends Component {
             </Col>
           </FormGroup>
           <FormGroup tag="fieldset" row>
-            <Label for="type" sm={2}>
-              Type of Space
-            </Label>
-            <Col sm={10} id="type">
-              <Container>
-                <FormGroup check inline>
-                  <Label check>
-                    <Input
-                      type="radio"
-                      name="radio2"
-                      value="practice"
-                      onChange={e => {
-                        this.handleInputChange('type', e);
-                      }}
-                    />{' '}
-                    Practice Room
-                  </Label>
-                </FormGroup>
-                <FormGroup check inline>
-                  <Label check>
-                    <Input
-                      type="radio"
-                      name="radio2"
-                      value="rehearsal"
-                      onChange={e => {
-                        this.handleInputChange('type', e);
-                      }}
-                    />{' '}
-                    Rehearsal Space
-                  </Label>
-                </FormGroup>
-                <FormGroup check inline>
-                  <Label check>
-                    <Input
-                      type="radio"
-                      name="radio2"
-                      value="hall"
-                      onChange={e => {
-                        this.handleInputChange('type', e);
-                      }}
-                    />{' '}
-                    Recording Hall
-                  </Label>
-                </FormGroup>
-                <FormGroup check inline>
-                  <Label check>
-                    <Input
-                      type="radio"
-                      name="radio2"
-                      value="studio"
-                      onChange={e => {
-                        this.handleInputChange('type', e);
-                      }}
-                    />{' '}
-                    Studio Space
-                  </Label>
-                </FormGroup>
-              </Container>
-            </Col>
+            <span className="btn-group justify-content-center" role="group">
+              <Col sm={10}>
+                <Button
+                  type="button"
+                  style={this.getTextStyle(this.state.type.practice)}
+                  value="practice"
+                  onClick={e => {
+                    this.handleTypeClick(e);
+                  }}
+                >
+                  Practice Room
+                </Button>
+                <Button
+                  type="button"
+                  style={this.getTextStyle(this.state.type.rehearsal)}
+                  value="rehearsal"
+                  onClick={e => {
+                    this.handleTypeClick(e);
+                  }}
+                >
+                  Rehearsal Space
+                </Button>
+
+                <Button
+                  type="button"
+                  style={this.getTextStyle(this.state.type.hall)}
+                  value="hall"
+                  onClick={e => {
+                    this.handleTypeClick(e);
+                  }}
+                >
+                  Recording Hall
+                </Button>
+
+                <Button
+                  type="button"
+                  style={this.getTextStyle(this.state.type.studio)}
+                  value="studio"
+                  onClick={e => {
+                    this.handleTypeClick(e);
+                  }}
+                >
+                  Studio Space
+                </Button>
+              </Col>
+            </span>
           </FormGroup>
           <FormGroup row>
             <Label for="description" sm={2}>
@@ -256,26 +244,10 @@ class AddSpace extends Component {
               />
             </Col>
           </FormGroup>
-          <FormGroup row>
-            <Label for="price" sm={2}>
-              Price?
-            </Label>
-            <Col sm={10}>
-              <Input
-                type="number"
-                name="number"
-                id="price"
-                value={this.state.price}
-                onChange={e => {
-                  this.handleInputChange('price', e);
-                }}
-                placeholder="Price in local currency?"
-              />
-            </Col>
-          </FormGroup>
+
           <FormGroup row>
             <Col sm={{ size: 10 }}>
-              <FormGroup check>
+              <FormGroup check className="justify-content-center">
                 <Container>
                   <Label check className="mr-4">
                     <Input
@@ -299,6 +271,23 @@ class AddSpace extends Component {
                     />{' '}
                     Drum Kit?
                   </Label>
+                  <br />
+                  <Label check className="mr-4">
+                    <Input
+                      type="checkbox"
+                      id="checkbox1"
+                      value="true"
+                      onChange={e => {
+                        this.handleInputChange('price', e);
+                      }}
+                    />{' '}
+                    Is there a charge for the space?
+                  </Label>
+                  {this.state.price && (
+                    <Alert color="warning">
+                      Please add information about the rates in the description
+                    </Alert>
+                  )}
                 </Container>
               </FormGroup>
             </Col>

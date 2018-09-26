@@ -21,14 +21,16 @@ export default {
   },
 
   postSpaces(data) {
+    var result = Object.keys(data.type).filter(key => data.type[key] === true);
     let formData = new FormData();
     console.log('data: ', data);
+    console.log('type api.js: ', result);
     formData.append('picture', data.picture);
     formData.append('name', data.name);
     formData.append('website', data.website);
     formData.append('lat', data.lat);
     formData.append('lng', data.lng);
-    formData.append('type', data.type);
+    formData.append('type', result);
     formData.append('price', data.price);
     formData.append('piano', data.piano);
     formData.append('drum', data.drum);

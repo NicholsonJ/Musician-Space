@@ -66,13 +66,15 @@ router.post('/', isLoggedIn, parser.single('picture'), (req, res, next) => {
   let _user = req.user;
   const imgPath = req.file.url;
   const imgName = req.file.originalname;
-  let { name, lat, lng, website, price, description } = req.body;
+  let { name, lat, lng, website, type, price, description } = req.body;
+  console.log('backend type:', type);
   const picture = [{ src: imgPath, altText: '', caption: '' }];
   Space.create({
     name,
     loc: { type: 'Point', coordinates: [lng, lat] },
     website,
     price,
+    type,
     picture,
     description,
     _user,

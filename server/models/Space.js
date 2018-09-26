@@ -17,12 +17,9 @@ const spaceSchema = new mongoose.Schema(
       // lng: String
     },
     website: String,
-    type: {
-      type: String,
-      enum: ['practice', 'rehearsal', 'hall', 'studio']
-    },
+    type: [String],
     description: String,
-    price: String,
+    price: Boolean,
     picture: [{}],
     piano: Boolean,
     drum: Boolean,
