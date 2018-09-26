@@ -13,8 +13,6 @@ const spaceSchema = new mongoose.Schema(
         default: 'Point'
       },
       coordinates: { type: [Number], default: [0, 0] } // [lng,lat]
-      // lat: String,
-      // lng: String
     },
     website: String,
     type: [String],

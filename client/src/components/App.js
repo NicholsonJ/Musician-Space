@@ -12,10 +12,7 @@ import {
   Collapse,
   Navbar,
   NavbarToggler,
-  NavbarBrand,
   Nav,
-  NavItem,
-  NavLink,
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
@@ -60,7 +57,7 @@ class App extends Component {
               <Nav className="ml-auto" navbar>
                 <UncontrolledDropdown nav inNavbar>
                   <DropdownToggle nav caret color="danger">
-                    <img src="./images/Note.png" />
+                    <img className="App-logo" src="./images/Note.png" alt="this" />
                   </DropdownToggle>
                   <DropdownMenu right>
                     <DropdownItem>

@@ -106,7 +106,7 @@ class Spaces extends Component {
     console.log(this.state.card);
     return (
       <div className="Spaces">
-        <div style={{ padding: '10px 300px', backgroundColor: 'black' }}>
+        <div style={{ padding: '10vh 20vw', backgroundColor: 'black' }}>
           <Container>
             <Row>
               <LocationSearchInput
