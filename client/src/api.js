@@ -91,9 +91,8 @@ export default {
   },
 
   logout() {
-    return service.get('/logout').then(res => {
-      localStorage.removeItem('user');
-    });
+    localStorage.removeItem('user');
+    return service.get('/logout').then(res => {});
   },
 
   // loadUser() {
