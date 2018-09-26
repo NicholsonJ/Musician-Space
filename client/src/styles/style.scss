@@ -1,7 +1,10 @@
-* {
-  margin: 0;
-  padding: 0;
-}
+$black: #5d6272;
+$darkgrey: #686e80;
+$midblue: #7c8a9c;
+$brownish: #a69888;
+$white: #ffffff;
+
+@import 'bootstrap/scss/bootstrap';
 
 .App {
   text-align: center;
@@ -10,10 +13,6 @@
 .App-logo {
   animation: App-logo-spin 5s linear 1s infinite alternate;
   height: 80px;
-}
-
-.App-header {
-  padding: 20px;
 }
 
 .App-header a {
@@ -49,4 +48,8 @@
 
 .custom-control {
   align-items: center;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }

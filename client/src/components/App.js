@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import { Route, Link, Switch } from 'react-router-dom';
-// import Home from './pages/Home';
 import Spaces from './pages/Spaces';
 import AddSpace from './pages/AddSpace';
 import Profile from './pages/Profile';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import api from '../api';
-import './App.css';
+import '../styles/style.css';
 import {
-  Collapse,
   Navbar,
   NavbarToggler,
   Nav,
@@ -19,9 +17,6 @@ import {
   DropdownItem
 } from 'reactstrap';
 
-// import SpaceDetail from './pages/components/SpaceDetail';
-// import LocationSearchInput from './pages/LocationSearch';
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -29,8 +24,7 @@ class App extends Component {
       spaces: [],
       isOpen: false
     };
-    // this.handleSelect = this.handleSelect.bind(this);
-    this.toggle = this.toggle.bind(this);
+    // this.toggle = this.toggle.bind(this);
   }
 
   handleLogoutClick(e) {
@@ -41,46 +35,45 @@ class App extends Component {
     console.log(latLng, address);
   }
 
-  toggle() {
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
-  }
+  // toggle() {
+  //   this.setState({
+  //     isOpen: !this.state.isOpen
+  //   });
+  // }
 
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <Navbar dark expand="md">
+        <header>
+          <Navbar dark expand="lg">
             <NavbarToggler onClick={this.toggle} />
-            <Collapse isOpen={this.state.isOpen} navbar>
-              <Nav className="ml-auto" navbar>
-                <UncontrolledDropdown nav inNavbar>
-                  <DropdownToggle nav caret color="danger">
-                    <img className="App-logo" src="./images/Note.png" alt="this" />
-                  </DropdownToggle>
-                  <DropdownMenu right>
-                    <DropdownItem>
-                      <Link to="/">Spaces</Link>
-                    </DropdownItem>
-                    <DropdownItem>
-                      {api.isLoggedIn() && <Link to="/add-space">Add Space</Link>}
-                    </DropdownItem>
-                    <DropdownItem>{api.isLoggedIn() && <Link to="/profile">Profile</Link>}</DropdownItem>
 
-                    <DropdownItem divider />
-                    <DropdownItem>{!api.isLoggedIn() && <Link to="/login">Login</Link>}</DropdownItem>
-                    <DropdownItem>
-                      {api.isLoggedIn() && (
-                        <Link to="/" onClick={e => this.handleLogoutClick(e)}>
-                          Logout
-                        </Link>
-                      )}
-                    </DropdownItem>
-                  </DropdownMenu>
-                </UncontrolledDropdown>
-              </Nav>
-            </Collapse>
+            <Nav className="ml-auto" navbar>
+              <UncontrolledDropdown nav inNavbar>
+                <DropdownToggle nav caret color="danger">
+                  <img className="App-logo" src="./images/Note.png" alt="this" />
+                </DropdownToggle>
+                <DropdownMenu right>
+                  <DropdownItem>
+                    <Link to="/">Spaces</Link>
+                  </DropdownItem>
+                  <DropdownItem>
+                    {api.isLoggedIn() && <Link to="/add-space">Add Space</Link>}
+                  </DropdownItem>
+                  <DropdownItem>{api.isLoggedIn() && <Link to="/profile">Profile</Link>}</DropdownItem>
+
+                  <DropdownItem divider />
+                  <DropdownItem>{!api.isLoggedIn() && <Link to="/login">Login</Link>}</DropdownItem>
+                  <DropdownItem>
+                    {api.isLoggedIn() && (
+                      <Link to="/" onClick={e => this.handleLogoutClick(e)}>
+                        Logout
+                      </Link>
+                    )}
+                  </DropdownItem>
+                </DropdownMenu>
+              </UncontrolledDropdown>
+            </Nav>
           </Navbar>
         </header>
         <Switch>

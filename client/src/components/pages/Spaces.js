@@ -9,10 +9,8 @@ import {
   Button,
   Col,
   Label,
-  Input,
   Card,
   CardTitle,
-  CardText,
   UncontrolledCarousel
 } from 'reactstrap';
 import PinInactive from '../markers/PinInactive';
@@ -82,7 +80,7 @@ class Spaces extends Component {
   }
 
   checkbox(e) {
-    console.log(e.target.name);
+    console.log(this.state[e.target.name]);
     this.setState({
       [e.target.name]: !this.state[e.target.name]
     });
@@ -106,7 +104,7 @@ class Spaces extends Component {
     console.log(this.state.card);
     return (
       <div className="Spaces">
-        <div style={{ padding: '10vh 20vw', backgroundColor: 'black' }}>
+        <div style={{ padding: '10px 20vw', backgroundColor: 'black' }}>
           <Container>
             <Row>
               <LocationSearchInput
@@ -126,14 +124,16 @@ class Spaces extends Component {
                 <Form>
                   <FormGroup check inline>
                     <Label check>
-                      <Input name="piano" type="checkbox" value="true" onClick={e => this.checkbox(e)} />{' '}
-                      Piano
+                      <Button name="piano" type="button" value="true" onClick={e => this.checkbox(e)}>
+                        Piano
+                      </Button>
                     </Label>
                   </FormGroup>
                   <FormGroup check inline>
                     <Label check>
-                      <Input name="drum" type="checkbox" value="true" onClick={e => this.checkbox(e)} />{' '}
-                      Drum Kit
+                      <Button name="drum" type="button" value="true" onClick={e => this.checkbox(e)}>
+                        Drum Kit
+                      </Button>
                     </Label>
                   </FormGroup>
                 </Form>
@@ -142,13 +142,10 @@ class Spaces extends Component {
                     <Card
                       key={i}
                       onClick={e => this.handleClick(e, s)}
-                      style={{ minHeight: '140px' }}
+                      style={{ minHeight: '200px' }}
                       onMouseOver={e => this.handleHover(e, i)}
                     >
                       <CardTitle>{s.name}</CardTitle>
-                      <CardText>
-                        <small className="text-muted">{s.description}</small>
-                      </CardText>
                       <Button onClick={e => this.detailsClick(e, s)}>More Details</Button>
                     </Card>
                   ))}
@@ -157,12 +154,12 @@ class Spaces extends Component {
             </Col>
             {!this.state.isHidden && (
               <Col>
-                <UncontrolledCarousel items={this.state.card.picture} />
+                <UncontrolledCarousel items={this.state.card.picture} style={{ height: '50px' }} />
                 <SpaceDetail space={this.state.card} onClick={e => this.detailsClick(e)} />
               </Col>
             )}
             <Col m="auto">
-              <div style={{ width: '100%', height: '80vh', border: '5px solid black' }}>
+              <div style={{ height: '80vh', border: '5px solid black' }}>
                 <GoogleMap center={this.state.center} zoom={this.state.zoom}>
                   {this.state.spaces.map((s, i) => (
                     <PinInactive key={i} lat={s.loc.coordinates[1]} lng={s.loc.coordinates[0]} />
