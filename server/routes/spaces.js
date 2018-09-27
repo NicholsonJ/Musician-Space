@@ -64,9 +64,17 @@ router.get('/:id', (req, res, next) => {
 // Route to add a space
 router.post('/', isLoggedIn, parser.single('picture'), (req, res, next) => {
   let _user = req.user;
-  const imgPath = req.file.url;
-  const imgName = req.file.originalname;
-  let { name, lat, lng, website, type, price, description } = req.body;
+  var imgPath;
+  var imgName;
+  if (req.file) {
+    imgPath = req.file.url;
+    imgName = req.file.originalname;
+  } else {
+    imgPath =
+      'https://res.cloudinary.com/dzhui69se/image/upload/v1538066077/practice-rooms/aqyq1ml9vnxgmu7mefcp.jpg';
+    imgName = 'Piano';
+  }
+  let { name, lat, lng, website, type, price, description, piano, drum } = req.body;
   console.log('backend type:', type);
   const picture = [{ src: imgPath, altText: '', caption: '' }];
   Space.create({
@@ -76,6 +84,8 @@ router.post('/', isLoggedIn, parser.single('picture'), (req, res, next) => {
     price,
     type,
     picture,
+    piano,
+    drum,
     description,
     _user,
     imgPath,

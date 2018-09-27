@@ -100,11 +100,14 @@ class AddSpace extends Component {
   getTextStyle(value) {
     if (value) {
       return {
-        backgroundColor: 'blue'
+        backgroundColor: '#5d6272',
+        boxShadow: 'inset 0 0 0 1px #27496d,inset 0 5px 30px #193047',
+        margin: '10px'
       };
     } else {
       return {
-        backgroundColor: 'green'
+        backgroundColor: '#a69888',
+        margin: '10px'
       };
     }
   }
@@ -112,7 +115,7 @@ class AddSpace extends Component {
     const isEnabled =
       this.state.name.length > 0 && this.state.loc.lat !== '' && this.state.loc.lng !== '';
     return (
-      <Container className="mt-5" style={{ maxWidth: '1000px' }}>
+      <Container className="mt-5 new-product">
         <h1>Add a new musician space</h1>
         <Alert color="success" isOpen={this.state.on}>
           {this.state.message}
@@ -166,53 +169,51 @@ class AddSpace extends Component {
               {this.state.address && <Alert color="danger">Your address: {this.state.address}</Alert>}
             </Col>
           </FormGroup>
-          <FormGroup tag="fieldset" row>
-            <span className="btn-group " role="group">
-              <Col className="d-flex justify-content-center">
-                <Button
-                  type="button"
-                  style={this.getTextStyle(this.state.type.practice)}
-                  value="practice"
-                  onClick={e => {
-                    this.handleTypeClick(e);
-                  }}
-                >
-                  Practice Room
-                </Button>
-                <Button
-                  type="button"
-                  style={this.getTextStyle(this.state.type.rehearsal)}
-                  value="rehearsal"
-                  onClick={e => {
-                    this.handleTypeClick(e);
-                  }}
-                >
-                  Rehearsal Space
-                </Button>
+          <FormGroup tag="fieldset">
+            <Col className="justify-content-center">
+              <Button
+                type="button"
+                style={this.getTextStyle(this.state.type.practice)}
+                value="practice"
+                onClick={e => {
+                  this.handleTypeClick(e);
+                }}
+              >
+                Practice Room
+              </Button>
+              <Button
+                type="button"
+                style={this.getTextStyle(this.state.type.rehearsal)}
+                value="rehearsal"
+                onClick={e => {
+                  this.handleTypeClick(e);
+                }}
+              >
+                Rehearsal Space
+              </Button>
 
-                <Button
-                  type="button"
-                  style={this.getTextStyle(this.state.type.hall)}
-                  value="hall"
-                  onClick={e => {
-                    this.handleTypeClick(e);
-                  }}
-                >
-                  Recording Hall
-                </Button>
+              <Button
+                type="button"
+                style={this.getTextStyle(this.state.type.hall)}
+                value="hall"
+                onClick={e => {
+                  this.handleTypeClick(e);
+                }}
+              >
+                Recording Hall
+              </Button>
 
-                <Button
-                  type="button"
-                  style={this.getTextStyle(this.state.type.studio)}
-                  value="studio"
-                  onClick={e => {
-                    this.handleTypeClick(e);
-                  }}
-                >
-                  Studio Space
-                </Button>
-              </Col>
-            </span>
+              <Button
+                type="button"
+                style={this.getTextStyle(this.state.type.studio)}
+                value="studio"
+                onClick={e => {
+                  this.handleTypeClick(e);
+                }}
+              >
+                Studio Space
+              </Button>
+            </Col>
           </FormGroup>
           <FormGroup row>
             <Label for="description" sm={2}>
@@ -249,65 +250,50 @@ class AddSpace extends Component {
               />
             </Col>
           </FormGroup>
-
-          <FormGroup row>
-            <Col>
-              <FormGroup check className="justify-content-center">
-                <Container>
-                  <Label check className="">
-                    <Button
-                      type="button"
-                      name="piano"
-                      style={this.getTextStyle(this.state.piano)}
-                      value="true"
-                      onClick={e => {
-                        this.handleButtonClick(e);
-                      }}
-                    >
-                      Piano?
-                    </Button>
-                  </Label>
-                  <Label check className="">
-                    <Button
-                      type="button"
-                      name="drum"
-                      style={this.getTextStyle(this.state.drum)}
-                      value="true"
-                      onClick={e => {
-                        this.handleButtonClick(e);
-                      }}
-                    >
-                      {' '}
-                      Drum Kit?
-                    </Button>
-                  </Label>
-                  <br />
-
-                  <Label check className="mt-3">
-                    <Button
-                      type="button"
-                      style={this.getTextStyle(this.state.price)}
-                      name="price"
-                      value="true"
-                      onClick={e => {
-                        this.handleButtonClick(e);
-                      }}
-                    >
-                      Is there a charge for the space?
-                    </Button>
-                  </Label>
-                  {this.state.price && (
-                    <Alert color="warning">
-                      Please add information about the rates in the description
-                    </Alert>
-                  )}
-                </Container>
-              </FormGroup>
-            </Col>
+          <FormGroup check className="btn-group justify-content-between" role="group">
+            <Button
+              type="button"
+              name="piano"
+              style={this.getTextStyle(this.state.piano)}
+              value="true"
+              onClick={e => {
+                this.handleButtonClick(e);
+              }}
+            >
+              Piano?
+            </Button>
+            <Button
+              type="button"
+              name="drum"
+              style={this.getTextStyle(this.state.drum)}
+              value="true"
+              onClick={e => {
+                this.handleButtonClick(e);
+              }}
+            >
+              {' '}
+              Drum Kit?
+            </Button>
           </FormGroup>
-          <FormGroup check row>
+          <FormGroup check tag="fieldset">
+            <Button
+              type="button"
+              style={this.getTextStyle(this.state.price)}
+              name="price"
+              value="true"
+              onClick={e => {
+                this.handleButtonClick(e);
+              }}
+            >
+              Is there a charge for the space?
+            </Button>
+            {this.state.price && (
+              <Alert color="warning">Please add information about the rates in the description</Alert>
+            )}
+          </FormGroup>
+          <FormGroup check row tag="fieldset">
             <Col>
-              <Button type="submit" disabled={!isEnabled}>
+              <Button type="submit" disabled={!isEnabled} style={{ margin: '20px' }}>
                 Submit
               </Button>
             </Col>

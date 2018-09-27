@@ -23,8 +23,7 @@ export default {
   postSpaces(data) {
     var result = Object.keys(data.type).filter(key => data.type[key] === true);
     let formData = new FormData();
-    console.log('data: ', data);
-    console.log('type api.js: ', result);
+    console.log('type api.js: ', result.toString().split(','));
     formData.append('picture', data.picture);
     formData.append('name', data.name);
     formData.append('website', data.website);

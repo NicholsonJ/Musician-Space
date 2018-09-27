@@ -33,7 +33,7 @@ class LocationSearchInput extends React.Component {
         onSelect={this.handleSelect}
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-          <Col>
+          <Col style={{ zIndex: '20' }}>
             <Input
               className="mw-100"
               {...getInputProps({
@@ -48,8 +48,8 @@ class LocationSearchInput extends React.Component {
                 const className = suggestion.active ? 'suggestion-item--active' : 'suggestion-item';
                 // inline style for demonstration purpose
                 const style = suggestion.active
-                  ? { backgroundColor: 'orange', cursor: 'pointer', color: 'black' }
-                  : { backgroundColor: '#ffffff', cursor: 'pointer', color: 'blue' };
+                  ? { backgroundColor: '#a69888', cursor: 'pointer', color: '#ffffff' }
+                  : { backgroundColor: '#ffffff', cursor: 'pointer', color: '#7c8a9c' };
                 return (
                   <div
                     {...getSuggestionItemProps(suggestion, {

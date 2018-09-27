@@ -6,7 +6,6 @@ import Profile from './pages/Profile';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import api from '../api';
-import '../styles/style.css';
 import { UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 class App extends Component {
@@ -36,9 +35,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="float-right">
+        <header className="float-right input-animation" style={{ zIndex: '20' }}>
           <UncontrolledDropdown direction="left">
-            <DropdownToggle color="white" className="navborder">
+            <DropdownToggle color="white" className="navborder" style={{ zIndex: '20' }}>
               <img
                 className="App-logo"
                 src="./images/Note.png"
@@ -46,16 +45,22 @@ class App extends Component {
                 style={{ height: '100%', width: 'auto' }}
               />
             </DropdownToggle>
-            <DropdownMenu className="dropdown-menu">
-              <DropdownItem>
+            <DropdownMenu className="dropdown-menu" style={{ zIndex: '20', padding: '4px' }}>
+              <DropdownItem style={{ zIndex: '20' }}>
                 <Link to="/">Spaces</Link>
               </DropdownItem>
-              <DropdownItem>{api.isLoggedIn() && <Link to="/add-space">Add Space</Link>}</DropdownItem>
-              <DropdownItem>{api.isLoggedIn() && <Link to="/profile">Profile</Link>}</DropdownItem>
+              <DropdownItem style={{ zIndex: '20' }}>
+                {api.isLoggedIn() && <Link to="/add-space">Add Space</Link>}
+              </DropdownItem>
+              <DropdownItem style={{ zIndex: '20' }}>
+                {api.isLoggedIn() && <Link to="/profile">Profile</Link>}
+              </DropdownItem>
 
               <DropdownItem divider />
-              <DropdownItem>{!api.isLoggedIn() && <Link to="/login">Login</Link>}</DropdownItem>
-              <DropdownItem>
+              <DropdownItem style={{ zIndex: '20' }}>
+                {!api.isLoggedIn() && <Link to="/login">Login</Link>}
+              </DropdownItem>
+              <DropdownItem style={{ zIndex: '20' }}>
                 {api.isLoggedIn() && (
                   <Link to="/" onClick={e => this.handleLogoutClick(e)}>
                     Logout

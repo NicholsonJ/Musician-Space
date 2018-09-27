@@ -8,6 +8,8 @@ $white: #ffffff;
 
 .App {
   text-align: center;
+  background-color: $white;
+  // background-image: url('./images/piano');
 }
 
 .App-logo {
@@ -22,6 +24,46 @@ $white: #ffffff;
 
   to {
     transform: rotate(30deg);
+  }
+}
+
+.openlogo {
+  animation: move 5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2s 1 both;
+  z-index: 10;
+}
+
+@keyframes move {
+  0% {
+    -webkit-transform: scale(2);
+    transform: scale(2) translate(0, 0);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1) translate(0, -100px);
+    opacity: 1;
+  }
+}
+
+.input-animation {
+  border: 0px solid $primary;
+  animation: moveit 2s cubic-bezier(0.445, 0.05, 0.55, 0.95) 5s both;
+}
+
+@keyframes moveit {
+  0% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    // -webkit-transform-origin: 100% 0%;
+    // transform-origin: 100% 0%;
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    // -webkit-transform-origin: 100% 0%;
+    // transform-origin: 100% 0%;
+    opacity: 1;
   }
 }
 
@@ -42,7 +84,6 @@ $white: #ffffff;
 }
 
 .navborder {
-  border: 1px solid $warning;
   height: 7vh;
 }
 
@@ -68,6 +109,7 @@ $white: #ffffff;
 
 .googleMaps {
   height: 90vh;
+  margin-top: 50px;
 }
 
 .spaceDescription {
@@ -91,4 +133,19 @@ $white: #ffffff;
     z-index: 5;
     width: 40%;
   }
+}
+
+.new-product {
+  max-width: 1000px;
+  border: 10px solid $danger;
+  border-radius: 20px;
+  padding: 5% 5%;
+}
+
+.spaceCard {
+  min-height: 150px;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+  padding: 10px;
+  margin: 20px;
+  margin-bottom: 40px;
 }

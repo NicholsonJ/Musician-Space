@@ -12,13 +12,13 @@ const greatPlaceStyle = {
   left: -K_WIDTH / 2,
   top: -K_HEIGHT,
 
-  backgroundImage: 'url(/images/inactivePin.png)',
+  // backgroundImage: 'url(/images/inactivePin.png)',
   backgroundSize: 'contain',
   backgroundPosition: 'center',
   backgroundRepeat: 'no-repeat'
 };
 
-class PinInactive extends Component {
+class Pin extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -28,12 +28,19 @@ class PinInactive extends Component {
     console.log(e.target);
   }
   render() {
+    let backgroundImage = this.props.isActive
+      ? 'url(/images/activePin.png)'
+      : 'url(/images/inactivePin.png)';
     return (
-      <div style={greatPlaceStyle} onClick={e => this.onClick(e)} onMouseLeave={this.props.onMouseLeave}>
+      <div
+        style={{ ...greatPlaceStyle, backgroundImage }}
+        onClick={e => this.onClick(e)}
+        onMouseLeave={this.props.onMouseLeave}
+      >
         <div>{this.props.children}</div>
       </div>
     );
   }
 }
 
-export default PinInactive;
+export default Pin;

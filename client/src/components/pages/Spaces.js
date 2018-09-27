@@ -8,12 +8,13 @@ import {
   Row,
   Button,
   Col,
+  CardText,
   Label,
   Card,
   CardTitle,
   UncontrolledCarousel
 } from 'reactstrap';
-import PinInactive from '../markers/PinInactive';
+import Pin from '../markers/Pin';
 import LocationSearchInput from './components/LocationSearch';
 import SpaceDetail from './components/SpaceDetail';
 
@@ -25,11 +26,12 @@ class Spaces extends Component {
       center: { lat: 0, lng: 0 },
       zoom: 10,
       address: '',
-      isHidden: 'true',
+      isHidden: true,
       card: '',
       hoverCard: '',
       piano: false,
-      drum: false
+      drum: false,
+      activeIndex: -1
     };
     this.handleSelect = this.handleSelect.bind(this);
   }
@@ -67,11 +69,11 @@ class Spaces extends Component {
     });
   }
 
-  detailsClick(e, s) {
-    console.log('here');
+  detailsClick(e, s, i) {
     this.setState({
       isHidden: !this.state.isHidden,
-      card: s
+      card: s,
+      activeIndex: i
     });
   }
 
@@ -85,21 +87,41 @@ class Spaces extends Component {
       [e.target.name]: !this.state[e.target.name]
     });
   }
-  a;
+
+  getTextStyle(value) {
+    if (value) {
+      return {
+        backgroundColor: '#5d6272',
+        boxShadow: 'inset 0 0 0 1px #27496d,inset 0 5px 30px #193047'
+      };
+    } else {
+      return {
+        backgroundColor: '#a69888'
+      };
+    }
+  }
+
   render() {
     if (this.state.center.lat === 0 && this.state.center.lng === 0) {
       return (
         <Container className="justify-content-center">
           <Col className="justify-content-center align-items-center vertical-center flex-column">
             <div>
-              <img src="./images/MusicianSpaceLogo.png" style={{ width: '100%' }} className="" />
-              <LocationSearchInput
-                className="form-control input-lg d-flex justify-content-center align-items-center"
-                placeholder="Where would you like space?"
-                onSelect={this.handleSelect}
-                id="address"
-                style={{ textAlign: 'center', minWidth: '300px', maxWidth: '500px' }}
+              <img
+                src="./images/MusicianSpaceLogo.png"
+                alt="Musician Space Logo"
+                style={{ width: '100%' }}
+                className="openlogo"
               />
+              <div className="input-animation">
+                <LocationSearchInput
+                  className="form-control input-lg d-flex justify-content-center align-items-center "
+                  placeholder="Where would you like space?"
+                  onSelect={this.handleSelect}
+                  id="address"
+                  style={{ textAlign: 'center', minWidth: '300px', maxWidth: '500px' }}
+                />
+              </div>
             </div>
           </Col>
         </Container>
@@ -146,8 +168,7 @@ class Spaces extends Component {
                     <Button
                       name="piano"
                       type="button"
-                      color="success"
-                      value="true"
+                      style={this.getTextStyle(this.state.piano)}
                       onClick={e => this.checkbox(e)}
                     >
                       Piano
@@ -159,8 +180,7 @@ class Spaces extends Component {
                     <Button
                       name="drum"
                       type="button"
-                      color="primary"
-                      value="true"
+                      style={this.getTextStyle(this.state.drum)}
                       onClick={e => this.checkbox(e)}
                     >
                       Drum Kit
@@ -169,17 +189,26 @@ class Spaces extends Component {
                 </FormGroup>
               </Form>
               <div className="pre-scrollable mt-3" style={{ maxHeight: '75vh' }}>
-                {spaces.map(s => (
+                {spaces.map((s, i) => (
                   <Card
                     key={s._id}
                     onClick={e => this.handleClick(e, s)}
-                    style={{ minHeight: '200px' }}
+                    className="spaceCard"
                     onMouseOver={e => this.handleHover(e, s)}
                   >
-                    <CardTitle>{s.name}</CardTitle>
-                    <Button style={{ maxWidth: '100%' }} onClick={e => this.detailsClick(e, s)}>
-                      More Details
-                    </Button>
+                    <CardTitle>
+                      <h3>{s.name}</h3>
+                    </CardTitle>
+
+                    {s.type.map((s, i) => (
+                      <CardText style={{ padding: '5px' }}>
+                        <h4 key={i}>{s}</h4>
+                      </CardText>
+                    ))}
+
+                    <Label check>
+                      <Button onClick={e => this.detailsClick(e, s, i)}>More Details</Button>
+                    </Label>
                   </Card>
                 ))}
               </div>
@@ -196,7 +225,12 @@ class Spaces extends Component {
               )}
               <GoogleMap center={this.state.center} zoom={this.state.zoom}>
                 {this.state.spaces.map((s, i) => (
-                  <PinInactive key={i} lat={s.loc.coordinates[1]} lng={s.loc.coordinates[0]} />
+                  <Pin
+                    key={i}
+                    lat={s.loc.coordinates[1]}
+                    isActive={i === this.state.activeIndex}
+                    lng={s.loc.coordinates[0]}
+                  />
                 ))}
               </GoogleMap>
             </div>
