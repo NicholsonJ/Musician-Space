@@ -6389,8 +6389,7 @@ a.text-dark:hover, a.text-dark:focus {
   z-index: 10; }
 
 .googleMaps {
-  height: 90vh;
-  margin-top: 50px; }
+  height: 90vh; }
 
 .spaceDescription {
   background-color: #ffffff;

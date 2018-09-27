@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button } from 'reactstrap';
 import AddPicture from './AddPicture';
+import api from '../../../api';
 
 class SpaceDetail extends Component {
   constructor(props) {
@@ -34,18 +35,21 @@ class SpaceDetail extends Component {
     return (
       <div className="spaceDetail">
         <h2>{this.props.space.name}</h2>
+        <hr />
         <p>{this.props.space.description} </p>
         {this.props.space.price && <div>There is a charge for this space</div>}
         <p>{this.props.space.website}</p>
         <br />
-        <Button
-          space={this.props.space}
-          onClick={e => {
-            this.handleClick(e);
-          }}
-        >
-          Add More Photos
-        </Button>
+        {api.isLoggedIn() && (
+          <Button
+            space={this.props.space}
+            onClick={e => {
+              this.handleClick(e);
+            }}
+          >
+            Add More Photos
+          </Button>
+        )}
 
         <hr />
         <Button onClick={e => this.props.onClick(e)}>Head Back</Button>

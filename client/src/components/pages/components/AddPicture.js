@@ -19,6 +19,7 @@ class AddPicture extends Component {
     let picture = this.state.picture;
     let space = this.props.space;
     console.log(picture);
+
     api.addPic(picture, space).then(result => {
       console.log('SUCCESS!');
     });

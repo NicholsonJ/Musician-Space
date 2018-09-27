@@ -6,7 +6,7 @@ import Profile from './pages/Profile';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import api from '../api';
-import { UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { Nav, NavItem, NavLink, Row } from 'reactstrap';
 
 class App extends Component {
   constructor(props) {
@@ -35,40 +35,39 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="float-right input-animation" style={{ zIndex: '20' }}>
-          <UncontrolledDropdown direction="left">
-            <DropdownToggle color="white" className="navborder" style={{ zIndex: '20' }}>
-              <img
-                className="App-logo"
-                src="./images/Note.png"
-                alt="this"
-                style={{ height: '100%', width: 'auto' }}
-              />
-            </DropdownToggle>
-            <DropdownMenu className="dropdown-menu" style={{ zIndex: '20', padding: '4px' }}>
-              <DropdownItem style={{ zIndex: '20' }}>
-                <Link to="/">Spaces</Link>
-              </DropdownItem>
-              <DropdownItem style={{ zIndex: '20' }}>
-                {api.isLoggedIn() && <Link to="/add-space">Add Space</Link>}
-              </DropdownItem>
-              <DropdownItem style={{ zIndex: '20' }}>
-                {api.isLoggedIn() && <Link to="/profile">Profile</Link>}
-              </DropdownItem>
-
-              <DropdownItem divider />
-              <DropdownItem style={{ zIndex: '20' }}>
-                {!api.isLoggedIn() && <Link to="/login">Login</Link>}
-              </DropdownItem>
-              <DropdownItem style={{ zIndex: '20' }}>
-                {api.isLoggedIn() && (
-                  <Link to="/" onClick={e => this.handleLogoutClick(e)}>
-                    Logout
-                  </Link>
-                )}
-              </DropdownItem>
-            </DropdownMenu>
-          </UncontrolledDropdown>
+        <header className="" style={{ zIndex: '20' }}>
+          <Nav className="float-right ml-auto" navbar>
+            <Row>
+              <NavItem style={{ margin: '5px' }}>
+                <NavLink href="/">Spaces</NavLink>
+              </NavItem>
+              {api.isLoggedIn() && (
+                <NavItem style={{ margin: '5px' }}>
+                  <NavLink href="/add-space">Add Space</NavLink>{' '}
+                </NavItem>
+              )}
+              {api.isLoggedIn() && (
+                <NavItem style={{ margin: '5px' }}>
+                  <NavLink href="/profile">Profile</NavLink>
+                </NavItem>
+              )}
+              {!api.isLoggedIn() && (
+                <NavItem style={{ margin: '5px' }}>
+                  <NavLink href="/login">Login</NavLink>
+                </NavItem>
+              )}
+              {!api.isLoggedIn() && (
+                <NavItem style={{ margin: '5px' }}>
+                  <NavLink href="/signup">Sign Up</NavLink>
+                </NavItem>
+              )}
+              {api.isLoggedIn() && (
+                <NavItem style={{ margin: '5px' }}>
+                  <NavLink href="/Logout">Log Out</NavLink>
+                </NavItem>
+              )}
+            </Row>
+          </Nav>
         </header>
         <Switch>
           <Route path="/" exact component={Spaces} />
