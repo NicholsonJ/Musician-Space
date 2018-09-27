@@ -100,18 +100,6 @@ router.post('/', isLoggedIn, parser.single('picture'), (req, res, next) => {
     .catch(err => next(err));
 });
 
-// Route to delete space
-router.delete('/:id/delete', isLoggedIn, (req, res, next) => {
-  Space.findByIdAndRemove(req.params.id)
-    .then(s => {
-      res.json({
-        success: true,
-        s
-      });
-    })
-    .catch(err => next(err));
-});
-
 //Route to like a space
 router.post('/like', isLoggedIn, (req, res, next) => {
   let _user = req.user;
@@ -129,12 +117,65 @@ router.post('/like', isLoggedIn, (req, res, next) => {
     .catch(err => next(err));
 });
 
+//add photo to a picture
+router.patch('/:id/addphoto', isLoggedIn, parser.single('picture'), (req, res, next) => {
+  var imgPath = req.file.url;
+  var imgName = req.file.originalname;
+  const picture = [{ src: imgPath, altText: '', caption: '' }];
+  console.log('backend picture: ', picture);
+  Space.update({ _id: req.params.id }, { $push: { picture: picture } })
+    .then(space => {
+      res.json({
+        success: true,
+        space
+      });
+    })
+    .catch(err => next(err));
+});
+
+// Route to delete space
+router.delete('/:id/delete', isLoggedIn, (req, res, next) => {
+  Space.findByIdAndRemove(req.params.id)
+    .then(s => {
+      res.json({
+        success: true,
+        s
+      });
+    })
+    .catch(err => next(err));
+});
+
 // Route to edit space
 router.patch('/:id', isLoggedIn, (req, res, next) => {
-  let { name, loc, website, price, picture, description } = req.body;
+  let _user = req.user;
+  var imgPath;
+  var imgName;
+  if (req.file) {
+    imgPath = req.file.url;
+    imgName = req.file.originalname;
+  } else {
+    imgPath =
+      'https://res.cloudinary.com/dzhui69se/image/upload/v1538066077/practice-rooms/aqyq1ml9vnxgmu7mefcp.jpg';
+    imgName = 'Piano';
+  }
+  let { name, lat, lng, website, type, price, description, piano, drum } = req.body;
+  const picture = [{ src: imgPath, altText: '', caption: '' }];
   Space.findByIdAndUpdate(
     req.params.id,
-    { name, loc, website, price, picture, description },
+    {
+      name,
+      loc: { type: 'Point', coordinates: [lng, lat] },
+      website,
+      price,
+      type,
+      picture,
+      piano,
+      drum,
+      description,
+      _user,
+      imgPath,
+      imgName
+    },
     { upsert: true, new: true }
   )
     .then(space => {

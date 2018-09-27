@@ -196,13 +196,11 @@ class Spaces extends Component {
                     className="spaceCard"
                     onMouseOver={e => this.handleHover(e, s)}
                   >
-                    <CardTitle>
-                      <h3>{s.name}</h3>
-                    </CardTitle>
+                    <CardTitle>{s.name}</CardTitle>
 
                     {s.type.map((s, i) => (
-                      <CardText style={{ padding: '5px' }}>
-                        <h4 key={i}>{s}</h4>
+                      <CardText key={i} style={{ padding: '5px' }}>
+                        {s}
                       </CardText>
                     ))}
 

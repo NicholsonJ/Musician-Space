@@ -23,7 +23,7 @@ export default {
   postSpaces(data) {
     var result = Object.keys(data.type).filter(key => data.type[key] === true);
     let formData = new FormData();
-    console.log('type api.js: ', result.toString().split(','));
+    console.log('type api.js: ', result);
     formData.append('picture', data.picture);
     formData.append('name', data.name);
     formData.append('website', data.website);
@@ -58,6 +58,19 @@ export default {
   getProfile() {
     return service
       .get('/profile')
+      .then(res => res.data)
+      .catch(errHandler);
+  },
+
+  addPic(picture, space) {
+    let formData = new FormData();
+    formData.append('picture', picture);
+    return service
+      .patch('/spaces/' + space._id + '/addphoto', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
       .then(res => res.data)
       .catch(errHandler);
   },
