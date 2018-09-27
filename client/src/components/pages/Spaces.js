@@ -85,19 +85,23 @@ class Spaces extends Component {
       [e.target.name]: !this.state[e.target.name]
     });
   }
-
+  a;
   render() {
     if (this.state.center.lat === 0 && this.state.center.lng === 0) {
       return (
-        <Container style={{ padding: '10px 20vw' }}>
-          <Row className="justify-content-center align-items-center vertical-center">
-            <LocationSearchInput
-              className="form-control input-lg d-flex justify-content-center align-items-center"
-              onSelect={this.handleSelect}
-              id="address"
-              style={{ border: '1px solid black' }}
-            />
-          </Row>
+        <Container className="justify-content-center">
+          <Col className="justify-content-center align-items-center vertical-center flex-column">
+            <div>
+              <img src="./images/MusicianSpaceLogo.png" style={{ width: '100%' }} className="" />
+              <LocationSearchInput
+                className="form-control input-lg d-flex justify-content-center align-items-center"
+                placeholder="Where would you like space?"
+                onSelect={this.handleSelect}
+                id="address"
+                style={{ textAlign: 'center', minWidth: '300px', maxWidth: '500px' }}
+              />
+            </div>
+          </Col>
         </Container>
       );
     }
@@ -123,6 +127,7 @@ class Spaces extends Component {
             <Row>
               <LocationSearchInput
                 className="form-control input-lg d-flex justify-content-center align-items-center"
+                placeholder="Looking for somewhere else?"
                 onSelect={this.handleSelect}
                 id="address"
                 style={{ border: '1px solid black', maxWidth: '300px' }}
@@ -183,17 +188,17 @@ class Spaces extends Component {
 
           <Col xs="12" sm="7" md="9">
             <div className="googleMaps">
+              {!this.state.isHidden && (
+                <div sm="6" className="spaceDescription">
+                  <UncontrolledCarousel items={this.state.card.picture} />
+                  <SpaceDetail space={this.state.card} onClick={e => this.detailsClick(e)} />
+                </div>
+              )}
               <GoogleMap center={this.state.center} zoom={this.state.zoom}>
                 {this.state.spaces.map((s, i) => (
                   <PinInactive key={i} lat={s.loc.coordinates[1]} lng={s.loc.coordinates[0]} />
                 ))}
               </GoogleMap>
-              {!this.state.isHidden && (
-                <div className="spaceDescription">
-                  <UncontrolledCarousel items={this.state.card.picture} />
-                  <SpaceDetail space={this.state.card} onClick={e => this.detailsClick(e)} />
-                </div>
-              )}
             </div>
           </Col>
         </Row>

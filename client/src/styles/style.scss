@@ -15,19 +15,6 @@ $white: #ffffff;
   height: 80px;
 }
 
-.App-header a {
-  padding: 0 5px;
-  color: $warning;
-}
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -76,19 +63,32 @@ $white: #ffffff;
   height: 10vh;
   padding: 10px 20vw;
   background-color: $white;
+  z-index: 10;
 }
 
 .googleMaps {
   height: 90vh;
-  position: relative;
 }
 
 .spaceDescription {
-  position: absolute;
-  top: 0;
-  left: 0;
   background-color: $white;
-  height: 90vh;
+  height: 100vh;
   z-index: 5;
-  width: 40%;
+  // width: 40%;
+}
+
+@media (min-width: 768px) {
+  .googleMaps {
+    height: 90vh;
+    position: relative;
+  }
+  .spaceDescription {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: $white;
+    height: 90vh;
+    z-index: 5;
+    width: 40%;
+  }
 }

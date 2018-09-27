@@ -157,6 +157,7 @@ class AddSpace extends Component {
               <Row>
                 <LocationSearchInput
                   onSelect={this.handleSelect}
+                  placeholder="Where can we find the space?"
                   id="address"
                   address={this.state.address}
                 />

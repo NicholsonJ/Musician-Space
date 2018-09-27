@@ -6319,16 +6319,6 @@ a.text-dark:hover, a.text-dark:focus {
   animation: App-logo-spin 5s linear 1s infinite alternate;
   height: 80px; }
 
-.App-header a {
-  padding: 0 5px;
-  color: #ffc107; }
-
-.App-title {
-  font-size: 1.5em; }
-
-.App-intro {
-  font-size: large; }
-
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg); }
@@ -6367,17 +6357,26 @@ a.text-dark:hover, a.text-dark:focus {
 .navSearch {
   height: 10vh;
   padding: 10px 20vw;
-  background-color: #ffffff; }
+  background-color: #ffffff;
+  z-index: 10; }
 
 .googleMaps {
-  height: 90vh;
-  position: relative; }
+  height: 90vh; }
 
 .spaceDescription {
-  position: absolute;
-  top: 0;
-  left: 0;
   background-color: #ffffff;
-  height: 90vh;
-  z-index: 5;
-  width: 40%; }
+  height: 100vh;
+  z-index: 5; }
+
+@media (min-width: 768px) {
+  .googleMaps {
+    height: 90vh;
+    position: relative; }
+  .spaceDescription {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #ffffff;
+    height: 90vh;
+    z-index: 5;
+    width: 40%; } }

@@ -19,9 +19,17 @@ const greatPlaceStyle = {
 };
 
 class PinInactive extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  onClick(e) {
+    console.log(e.target);
+  }
   render() {
     return (
-      <div style={greatPlaceStyle} onClick={this.props.onClick} onMouseLeave={this.props.onMouseLeave}>
+      <div style={greatPlaceStyle} onClick={e => this.onClick(e)} onMouseLeave={this.props.onMouseLeave}>
         <div>{this.props.children}</div>
       </div>
     );
