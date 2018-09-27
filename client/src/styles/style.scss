@@ -1,7 +1,7 @@
-$black: #5d6272;
-$darkgrey: #686e80;
-$midblue: #7c8a9c;
-$brownish: #a69888;
+$primary: #5d6272 !default;
+$secondary: #686e80;
+$danger: #7c8a9c;
+$success: #a69888;
 $white: #ffffff;
 
 @import 'bootstrap/scss/bootstrap';
@@ -17,7 +17,7 @@ $white: #ffffff;
 
 .App-header a {
   padding: 0 5px;
-  color: orange;
+  color: $warning;
 }
 
 .App-title {
@@ -52,4 +52,43 @@ $white: #ffffff;
 
 ::-webkit-scrollbar {
   display: none;
+}
+
+.navborder {
+  border: 1px solid $warning;
+  height: 7vh;
+}
+
+.dropdown-menu {
+  left: 50%;
+  right: auto;
+  text-align: center;
+  transform: translate(-50%, 0);
+  position: absolute;
+}
+
+.Spaces {
+  background-color: $white;
+  height: 100vh;
+}
+
+.navSearch {
+  height: 10vh;
+  padding: 10px 20vw;
+  background-color: $white;
+}
+
+.googleMaps {
+  height: 90vh;
+  position: relative;
+}
+
+.spaceDescription {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: $white;
+  height: 90vh;
+  z-index: 5;
+  width: 40%;
 }

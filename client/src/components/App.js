@@ -7,15 +7,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import api from '../api';
 import '../styles/style.css';
-import {
-  Navbar,
-  NavbarToggler,
-  Nav,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem
-} from 'reactstrap';
+import { UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 class App extends Component {
   constructor(props) {
@@ -44,37 +36,34 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header>
-          <Navbar dark expand="lg">
-            <NavbarToggler onClick={this.toggle} />
+        <header className="float-right">
+          <UncontrolledDropdown direction="left">
+            <DropdownToggle color="white" className="navborder">
+              <img
+                className="App-logo"
+                src="./images/Note.png"
+                alt="this"
+                style={{ height: '100%', width: 'auto' }}
+              />
+            </DropdownToggle>
+            <DropdownMenu className="dropdown-menu">
+              <DropdownItem>
+                <Link to="/">Spaces</Link>
+              </DropdownItem>
+              <DropdownItem>{api.isLoggedIn() && <Link to="/add-space">Add Space</Link>}</DropdownItem>
+              <DropdownItem>{api.isLoggedIn() && <Link to="/profile">Profile</Link>}</DropdownItem>
 
-            <Nav className="ml-auto" navbar>
-              <UncontrolledDropdown nav inNavbar>
-                <DropdownToggle nav caret color="danger">
-                  <img className="App-logo" src="./images/Note.png" alt="this" />
-                </DropdownToggle>
-                <DropdownMenu right>
-                  <DropdownItem>
-                    <Link to="/">Spaces</Link>
-                  </DropdownItem>
-                  <DropdownItem>
-                    {api.isLoggedIn() && <Link to="/add-space">Add Space</Link>}
-                  </DropdownItem>
-                  <DropdownItem>{api.isLoggedIn() && <Link to="/profile">Profile</Link>}</DropdownItem>
-
-                  <DropdownItem divider />
-                  <DropdownItem>{!api.isLoggedIn() && <Link to="/login">Login</Link>}</DropdownItem>
-                  <DropdownItem>
-                    {api.isLoggedIn() && (
-                      <Link to="/" onClick={e => this.handleLogoutClick(e)}>
-                        Logout
-                      </Link>
-                    )}
-                  </DropdownItem>
-                </DropdownMenu>
-              </UncontrolledDropdown>
-            </Nav>
-          </Navbar>
+              <DropdownItem divider />
+              <DropdownItem>{!api.isLoggedIn() && <Link to="/login">Login</Link>}</DropdownItem>
+              <DropdownItem>
+                {api.isLoggedIn() && (
+                  <Link to="/" onClick={e => this.handleLogoutClick(e)}>
+                    Logout
+                  </Link>
+                )}
+              </DropdownItem>
+            </DropdownMenu>
+          </UncontrolledDropdown>
         </header>
         <Switch>
           <Route path="/" exact component={Spaces} />

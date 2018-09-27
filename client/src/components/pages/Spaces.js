@@ -101,10 +101,24 @@ class Spaces extends Component {
         </Container>
       );
     }
-    console.log(this.state.card);
+
+    let spaces = this.state.spaces;
+    console.log('spaces: ', spaces);
+    if (this.state.piano) {
+      spaces = this.state.spaces.filter(space => space.piano);
+      console.log('revised spaces', spaces);
+    }
+    if (this.state.drum) {
+      spaces = this.state.spaces.filter(space => space.drum);
+      console.log('revised spaces', spaces);
+    }
+    if (this.state.drum && this.state.piano) {
+      spaces = this.state.spaces.filter(space => space.drum && space.piano);
+      console.log('revised spaces', spaces);
+    }
     return (
       <div className="Spaces">
-        <div style={{ padding: '10px 20vw', backgroundColor: 'black' }}>
+        <div className="navSearch">
           <Container>
             <Row>
               <LocationSearchInput
@@ -116,59 +130,73 @@ class Spaces extends Component {
             </Row>
           </Container>
         </div>
-        <Container>
-          <Row>
-            <Col m="6" sm="4">
-              <div>
-                <h2>List of spaces</h2>
-                <Form>
-                  <FormGroup check inline>
-                    <Label check>
-                      <Button name="piano" type="button" value="true" onClick={e => this.checkbox(e)}>
-                        Piano
-                      </Button>
-                    </Label>
-                  </FormGroup>
-                  <FormGroup check inline>
-                    <Label check>
-                      <Button name="drum" type="button" value="true" onClick={e => this.checkbox(e)}>
-                        Drum Kit
-                      </Button>
-                    </Label>
-                  </FormGroup>
-                </Form>
-                <Container className="pre-scrollable mt-3" style={{ maxHeight: '75vh' }}>
-                  {this.state.spaces.map((s, i) => (
-                    <Card
-                      key={i}
-                      onClick={e => this.handleClick(e, s)}
-                      style={{ minHeight: '200px' }}
-                      onMouseOver={e => this.handleHover(e, i)}
+
+        <Row>
+          <Col xs="12" sm="5" md="3">
+            <div>
+              <h2>List of spaces</h2>
+              <Form>
+                <FormGroup check inline>
+                  <Label check>
+                    <Button
+                      name="piano"
+                      type="button"
+                      color="success"
+                      value="true"
+                      onClick={e => this.checkbox(e)}
                     >
-                      <CardTitle>{s.name}</CardTitle>
-                      <Button onClick={e => this.detailsClick(e, s)}>More Details</Button>
-                    </Card>
-                  ))}
-                </Container>
+                      Piano
+                    </Button>
+                  </Label>
+                </FormGroup>
+                <FormGroup check inline>
+                  <Label check>
+                    <Button
+                      name="drum"
+                      type="button"
+                      color="primary"
+                      value="true"
+                      onClick={e => this.checkbox(e)}
+                    >
+                      Drum Kit
+                    </Button>
+                  </Label>
+                </FormGroup>
+              </Form>
+              <div className="pre-scrollable mt-3" style={{ maxHeight: '75vh' }}>
+                {spaces.map(s => (
+                  <Card
+                    key={s._id}
+                    onClick={e => this.handleClick(e, s)}
+                    style={{ minHeight: '200px' }}
+                    onMouseOver={e => this.handleHover(e, s)}
+                  >
+                    <CardTitle>{s.name}</CardTitle>
+                    <Button style={{ maxWidth: '100%' }} onClick={e => this.detailsClick(e, s)}>
+                      More Details
+                    </Button>
+                  </Card>
+                ))}
               </div>
-            </Col>
-            {!this.state.isHidden && (
-              <Col>
-                <UncontrolledCarousel items={this.state.card.picture} style={{ height: '50px' }} />
-                <SpaceDetail space={this.state.card} onClick={e => this.detailsClick(e)} />
-              </Col>
-            )}
-            <Col m="auto">
-              <div style={{ height: '80vh', border: '5px solid black' }}>
-                <GoogleMap center={this.state.center} zoom={this.state.zoom}>
-                  {this.state.spaces.map((s, i) => (
-                    <PinInactive key={i} lat={s.loc.coordinates[1]} lng={s.loc.coordinates[0]} />
-                  ))}
-                </GoogleMap>
-              </div>
-            </Col>
-          </Row>
-        </Container>
+            </div>
+          </Col>
+
+          <Col xs="12" sm="7" md="9">
+            <div className="googleMaps">
+              <GoogleMap center={this.state.center} zoom={this.state.zoom}>
+                {this.state.spaces.map((s, i) => (
+                  <PinInactive key={i} lat={s.loc.coordinates[1]} lng={s.loc.coordinates[0]} />
+                ))}
+              </GoogleMap>
+              {!this.state.isHidden && (
+                <div className="spaceDescription">
+                  <UncontrolledCarousel items={this.state.card.picture} />
+                  <SpaceDetail space={this.state.card} onClick={e => this.detailsClick(e)} />
+                </div>
+              )}
+            </div>
+          </Col>
+        </Row>
       </div>
     );
   }
