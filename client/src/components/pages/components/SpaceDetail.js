@@ -63,6 +63,7 @@ class SpaceDetail extends Component {
             >
               Add a comment
             </Button>
+            <br />
             <Button
               space={this.props.space}
               onClick={e => {

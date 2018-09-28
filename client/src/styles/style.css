@@ -6395,8 +6395,7 @@ a.text-dark:hover, a.text-dark:focus {
   background-color: #ffffff;
   height: 100vh;
   z-index: 5;
-  -webkit-animation: slide-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-  animation: slide-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both; }
+  width: 40%; }
 
 .spaceDetail {
   transition-delay: 0.5s;
@@ -6413,8 +6412,7 @@ a.text-dark:hover, a.text-dark:focus {
     background-color: #ffffff;
     height: 90vh;
     z-index: 5;
-    width: 0;
-    animation: slide 1s forwards; } }
+    width: 40%; } }
 
 @-webkit-keyframes slide {
   100% {
