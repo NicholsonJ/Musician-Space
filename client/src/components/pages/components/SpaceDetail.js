@@ -36,23 +36,39 @@ class SpaceDetail extends Component {
       <div className="spaceDetail">
         <h2>{this.props.space.name}</h2>
         <hr />
+        <p>{this.props.space.address} </p>
+        <p>{this.props.space.website}</p>
         <p>{this.props.space.description} </p>
         {this.props.space.price && <div>There is a charge for this space</div>}
-        <p>{this.props.space.website}</p>
+        Available amenitities:
+        {this.props.space.drum && <div>Drum Kit</div>}
+        {this.props.space.piano && <div>Piano</div>}
         <br />
-        {api.isLoggedIn() && (
-          <Button
-            space={this.props.space}
-            onClick={e => {
-              this.handleClick(e);
-            }}
-          >
-            Add More Photos
-          </Button>
-        )}
-
         <hr />
-        <Button onClick={e => this.props.onClick(e)}>Head Back</Button>
+        {api.isLoggedIn() && (
+          <div>
+            <Button
+              space={this.props.space}
+              onClick={e => {
+                this.handleClick(e);
+              }}
+              color="success"
+            >
+              Add a comment
+            </Button>
+            <Button
+              space={this.props.space}
+              onClick={e => {
+                this.handleClick(e);
+              }}
+              color="success"
+              outline
+              style={{ marginTop: '10px' }}
+            >
+              Add More Photos
+            </Button>
+          </div>
+        )}
       </div>
     );
   }

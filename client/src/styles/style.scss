@@ -116,7 +116,14 @@ $white: #ffffff;
   background-color: $white;
   height: 100vh;
   z-index: 5;
+  -webkit-animation: slide-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   // width: 40%;
+}
+
+.spaceDetail {
+  transition-delay: 0.5s;
+  transform: inherit;
 }
 
 @media (min-width: 768px) {
@@ -132,6 +139,24 @@ $white: #ffffff;
     background-color: $white;
     height: 90vh;
     z-index: 5;
+    width: 0;
+    animation: slide 1s forwards;
+    // -webkit-animation: slide-right 5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    // animation: slide-right 5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  }
+}
+@-webkit-keyframes slide {
+  100% {
+    left: 0;
+    font-size: 0;
+    width: 0;
+  }
+}
+
+@keyframes slide {
+  100% {
+    left: 0;
+    font-size: '16px';
     width: 40%;
   }
 }

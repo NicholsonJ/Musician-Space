@@ -1,4 +1,4 @@
-import React, { Component, Redirect } from 'react';
+import React, { Component } from 'react';
 import api from '../../../api';
 import { Col, Button, Container, Form, FormGroup, Label, Input } from 'reactstrap';
 

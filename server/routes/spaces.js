@@ -74,7 +74,7 @@ router.post('/', isLoggedIn, parser.single('picture'), (req, res, next) => {
       'https://res.cloudinary.com/dzhui69se/image/upload/v1538066077/practice-rooms/aqyq1ml9vnxgmu7mefcp.jpg';
     imgName = 'Piano';
   }
-  let { name, lat, lng, website, type, price, description, piano, drum } = req.body;
+  let { name, lat, lng, website, type, price, description, piano, address, drum } = req.body;
   console.log('backend type:', type);
   const picture = [{ src: imgPath, altText: '', caption: '' }];
   Space.create({
@@ -84,6 +84,7 @@ router.post('/', isLoggedIn, parser.single('picture'), (req, res, next) => {
     price,
     type,
     picture,
+    address,
     piano,
     drum,
     description,

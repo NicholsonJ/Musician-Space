@@ -26,6 +26,7 @@ export default {
     console.log('type api.js: ', result);
     formData.append('picture', data.picture);
     formData.append('name', data.name);
+    formData.append('address', data.address);
     formData.append('website', data.website);
     formData.append('lat', data.lat);
     formData.append('lng', data.lng);

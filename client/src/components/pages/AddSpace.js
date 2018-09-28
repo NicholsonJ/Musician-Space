@@ -52,6 +52,7 @@ class AddSpace extends Component {
       lat: this.state.loc.lat,
       lng: this.state.loc.lng,
       picture: this.state.picture,
+      address: this.state.address,
       type: this.state.type,
       price: this.state.price,
       piano: this.state.piano,

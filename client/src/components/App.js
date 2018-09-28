@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { Route, Link, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Spaces from './pages/Spaces';
 import AddSpace from './pages/AddSpace';
 import Profile from './pages/Profile';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import api from '../api';
-import { Nav, NavItem, NavLink, Row } from 'reactstrap';
+import { Nav, NavItem, NavLink, Navbar, NavbarToggler, Collapse } from 'reactstrap';
 
 class App extends Component {
   constructor(props) {
@@ -15,7 +15,7 @@ class App extends Component {
       spaces: [],
       isOpen: false
     };
-    // this.toggle = this.toggle.bind(this);
+    this.toggle = this.toggle.bind(this);
   }
 
   handleLogoutClick(e) {
@@ -26,49 +26,50 @@ class App extends Component {
     console.log(latLng, address);
   }
 
-  // toggle() {
-  //   this.setState({
-  //     isOpen: !this.state.isOpen
-  //   });
-  // }
+  toggle() {
+    this.setState({
+      isOpen: !this.state.isOpen
+    });
+  }
 
   render() {
     return (
       <div className="App">
-        <header className="" style={{ zIndex: '20' }}>
-          <Nav className="float-right ml-auto" navbar>
-            <Row>
-              <NavItem style={{ margin: '5px' }}>
+        <Navbar color="faded" light>
+          <NavbarToggler onClick={this.toggle} className="mr-2 float-right ml-auto light" />
+          <Collapse isOpen={this.state.isOpen} navbar>
+            <Nav navbar>
+              <NavItem>
                 <NavLink href="/">Spaces</NavLink>
               </NavItem>
               {api.isLoggedIn() && (
-                <NavItem style={{ margin: '5px' }}>
+                <NavItem>
                   <NavLink href="/add-space">Add Space</NavLink>{' '}
                 </NavItem>
               )}
               {api.isLoggedIn() && (
-                <NavItem style={{ margin: '5px' }}>
+                <NavItem>
                   <NavLink href="/profile">Profile</NavLink>
                 </NavItem>
               )}
               {!api.isLoggedIn() && (
-                <NavItem style={{ margin: '5px' }}>
+                <NavItem>
                   <NavLink href="/login">Login</NavLink>
                 </NavItem>
               )}
               {!api.isLoggedIn() && (
-                <NavItem style={{ margin: '5px' }}>
+                <NavItem>
                   <NavLink href="/signup">Sign Up</NavLink>
                 </NavItem>
               )}
               {api.isLoggedIn() && (
-                <NavItem style={{ margin: '5px' }}>
+                <NavItem>
                   <NavLink href="/Logout">Log Out</NavLink>
                 </NavItem>
               )}
-            </Row>
-          </Nav>
-        </header>
+            </Nav>
+          </Collapse>
+        </Navbar>
         <Switch>
           <Route path="/" exact component={Spaces} />
           {/* <Route path="/spaces" component={Spaces} /> */}

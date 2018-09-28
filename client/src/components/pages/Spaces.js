@@ -6,9 +6,9 @@ import {
   FormGroup,
   Container,
   Row,
-  Button,
   Col,
   CardText,
+  Button,
   Label,
   Card,
   CardTitle,
@@ -205,7 +205,9 @@ class Spaces extends Component {
                     ))}
 
                     <Label check>
-                      <Button onClick={e => this.detailsClick(e, s, i)}>More Details</Button>
+                      <Button onClick={e => this.detailsClick(e, s, i)} outline>
+                        More Details
+                      </Button>
                     </Label>
                   </Card>
                 ))}
@@ -217,8 +219,17 @@ class Spaces extends Component {
             <div className="googleMaps">
               {!this.state.isHidden && (
                 <div sm="6" className="spaceDescription">
+                  <Button
+                    className="float-right"
+                    onClick={e => this.detailsClick(e)}
+                    style={{ zIndex: 20 }}
+                    outline
+                  >
+                    &lt;
+                  </Button>
+                  <br />
                   <UncontrolledCarousel items={this.state.card.picture} />
-                  <SpaceDetail space={this.state.card} onClick={e => this.detailsClick(e)} />
+                  <SpaceDetail space={this.state.card} />
                 </div>
               )}
               <GoogleMap center={this.state.center} zoom={this.state.zoom}>
