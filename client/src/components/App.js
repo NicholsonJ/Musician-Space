@@ -47,11 +47,11 @@ class App extends Component {
                   <NavLink href="/add-space">Add Space</NavLink>{' '}
                 </NavItem>
               )}
-              {api.isLoggedIn() && (
+              {/* {api.isLoggedIn() && (
                 <NavItem>
                   <NavLink href="/profile">Profile</NavLink>
                 </NavItem>
-              )}
+              )} */}
               {!api.isLoggedIn() && (
                 <NavItem>
                   <NavLink href="/login">Login</NavLink>
