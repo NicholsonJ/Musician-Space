@@ -1,56 +1,54 @@
 import React, { Component } from 'react';
 import api from '../../../api';
-import { Col, Button, Container, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Col, Button, Container, Form, FormGroup, Input } from 'reactstrap';
 
-class AddPicture extends Component {
+class AddComment extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      picture: '',
-      message: '',
-      on: false,
-      redirect: false
+      comment: ''
     };
   }
 
   handleClick(e) {
     e.preventDefault();
     console.log(this.state);
-    let picture = this.state.picture;
+    let comment = this.state.comment;
     let space = this.props.space;
-    console.log(picture);
+    console.log(comment);
 
-    api.addPic(picture, space).then(result => {
+    api.addComment(comment, space).then(result => {
       console.log('SUCCESS!');
     });
   }
-  handleFile(e) {
+  handleChange(e) {
     this.setState({
-      picture: e.target.files[0]
+      comment: e.target.value
     });
+    console.log(this.state.comment);
   }
   render() {
-    const isEnabled = this.state.picture !== '';
-    console.log(this.props.space);
+    const isEnabled = this.state.comment !== '';
 
     return (
       <Container>
-        <h1>Add a new picture!</h1>
+        <h1>Need to comment on the space?</h1>
         <Form className="mt-5" encType="multipart/form-data" onSubmit={e => this.handleClick(e)}>
-          <FormGroup>
-            <Label for="picture" sm={2}>
-              Picture
-            </Label>
+          <FormGroup row>
+            <h4>Add a Comment</h4>
             <br />
             <Col sm={10}>
               <Input
-                type="file"
-                name="picture"
-                id="picture"
-                accept="image/*"
+                type="textarea"
+                name="comment"
+                id="comment"
+                value={this.state.comment}
+                cols="30"
+                rows="10"
                 onChange={e => {
-                  this.handleFile(e);
+                  this.handleChange(e);
                 }}
+                placeholder="What details are missing?"
               />
             </Col>
           </FormGroup>
@@ -67,4 +65,4 @@ class AddPicture extends Component {
   }
 }
 
-export default AddPicture;
+export default AddComment;

@@ -28,6 +28,7 @@ class Spaces extends Component {
       address: '',
       isHidden: true,
       card: '',
+      comments: [],
       hoverCard: '',
       piano: false,
       drum: false,
@@ -70,6 +71,12 @@ class Spaces extends Component {
   }
 
   detailsClick(e, s, i) {
+    // api.getComments(s).then(comments => {
+    //   console.log(comments);
+    //   this.setState({
+    //     comments: comments
+    //   });
+    // });
     this.setState({
       isHidden: !this.state.isHidden,
       card: s,
@@ -228,7 +235,10 @@ class Spaces extends Component {
                     &lt;
                   </Button>
                   <br />
-                  <UncontrolledCarousel items={this.state.card.picture} />
+                  <div style={{ maxHeight: '100px!important' }}>
+                    <UncontrolledCarousel items={this.state.card.picture} />
+                  </div>
+                  <hr />
                   <SpaceDetail space={this.state.card} />
                 </div>
               )}

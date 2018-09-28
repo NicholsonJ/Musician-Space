@@ -2,19 +2,21 @@ import React, { Component } from 'react';
 import { Button } from 'reactstrap';
 import AddPicture from './AddPicture';
 import api from '../../../api';
+import AddComment from './AddComment';
 
 class SpaceDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      addpic: false
+      addpic: false,
+      addcomment: false
     };
   }
 
   handleClick(e, s) {
     console.log('handleclick: ', this.state.addpic);
     this.setState({
-      addpic: true
+      [e.target.name]: true
     });
   }
 
@@ -30,6 +32,10 @@ class SpaceDetail extends Component {
     console.log(this.state.addpic);
     if (this.state.addpic) {
       return <AddPicture space={this.props.space} newstate={e => this.changeState(e)} />;
+    }
+
+    if (this.state.addcomment) {
+      return <AddComment space={this.props.space} newstate={e => this.changeState(e)} />;
     }
 
     return (
@@ -52,6 +58,7 @@ class SpaceDetail extends Component {
               onClick={e => {
                 this.handleClick(e);
               }}
+              name="addcomment"
               color="success"
             >
               Add a comment
@@ -63,6 +70,7 @@ class SpaceDetail extends Component {
               }}
               color="success"
               outline
+              name="addpic"
               style={{ marginTop: '10px' }}
             >
               Add More Photos

@@ -76,6 +76,22 @@ export default {
       .catch(errHandler);
   },
 
+  getComment(space) {
+    return service
+      .get('/comments/space/' + space._id)
+      .then(res => res.data)
+      .catch(errHandler);
+  },
+
+  addComment(comment, space) {
+    let _space = space;
+    console.log(comment);
+    return service
+      .post('/comments/', { comment, _space })
+      .then(res => res.data)
+      .catch(errHandler);
+  },
+
   createLike(_space) {
     return service
       .post('/spaces/like', _space)
