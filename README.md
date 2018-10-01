@@ -2,12 +2,12 @@
 
 A RESOURCE FOR MUSICIANS TO FIND PRACTICE ROOMS AROUND THE WORLD.
 
-![Landing Page](images/LandingPage.png)
+![Landing Page](client/public/images/LandingPage.png)
 
-![Locations and Map](images/HomePage.png)
+![Locations and Map](client/public/images/HomePage.png)
 
-![Responsive application](images/Responsive1.png)
-![Map view on phone](images/Responsive2.png)
+![Responsive application](client/public/images/Responsive1.png)
+![Map view on phone](client/public/images/Responsive2.png)
 
 ## Global information
 
