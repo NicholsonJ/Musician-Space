@@ -4,10 +4,18 @@ A RESOURCE FOR MUSICIANS TO FIND PRACTICE ROOMS AROUND THE WORLD.
 
 ![Landing Page](client/public/images/LandingPage.png)
 
+### Filter your results by location
+
 ![Locations and Map](client/public/images/HomePage.png)
+
+### Responsive on mobile devices
 
 ![Responsive application](client/public/images/Responsive1.png)
 ![Map view on phone](client/public/images/Responsive2.png)
+
+### Add new spaces
+
+![Add Spaces](client/public/images/NewSpace.png)
 
 ## Global information
 
