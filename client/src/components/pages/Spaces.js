@@ -60,14 +60,20 @@ class Spaces extends Component {
   handleSelect(latLng, address) {
     console.log('address: ', address);
     console.log(latLng);
-
-    this.setState({
-      center: {
-        lat: latLng.lat,
-        lng: latLng.lng
-      },
-      address
-    });
+    api
+      .getSpaces(latLng.lat, latLng.lng)
+      .then(spaces => {
+        console.log(spaces);
+        this.setState({
+          spaces: spaces,
+          center: {
+            lat: latLng.lat,
+            lng: latLng.lng
+          },
+          address
+        });
+      })
+      .catch(err => console.log(err));
   }
 
   detailsClick(e, s, i) {
@@ -207,7 +213,7 @@ class Spaces extends Component {
                     <hr />
                     {s.type.map((s, i) => (
                       <CardText key={i} style={{ padding: '5px' }}>
-                        {s}
+                        Types of spaces: {s}
                       </CardText>
                     ))}
 

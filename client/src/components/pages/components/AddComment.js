@@ -12,10 +12,10 @@ class AddComment extends Component {
 
   handleClick(e) {
     e.preventDefault();
-    console.log(this.state);
+    // console.log(this.state);
     let comment = this.state.comment;
     let space = this.props.space;
-    console.log(comment);
+    // console.log(comment);
 
     api.addComment(comment, space).then(result => {
       console.log('SUCCESS!');
@@ -26,7 +26,7 @@ class AddComment extends Component {
     this.setState({
       comment: e.target.value
     });
-    console.log(this.state.comment);
+    // console.log(this.state.comment);
   }
   render() {
     const isEnabled = this.state.comment !== '';
