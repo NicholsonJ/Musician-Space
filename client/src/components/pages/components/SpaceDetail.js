@@ -23,7 +23,8 @@ class SpaceDetail extends Component {
   changeState(e) {
     console.log('addpic:', this.state.addpic);
     this.setState({
-      addpic: false
+      addpic: false,
+      addcomment: false
     });
   }
 
@@ -31,11 +32,11 @@ class SpaceDetail extends Component {
     console.log(this.props.space.name);
     console.log(this.state.addpic);
     if (this.state.addpic) {
-      return <AddPicture space={this.props.space} newstate={e => this.changeState(e)} />;
+      return <AddPicture space={this.props.space} clickConfirmed={e => this.changeState(e)} />;
     }
 
     if (this.state.addcomment) {
-      return <AddComment space={this.props.space} newstate={e => this.changeState(e)} />;
+      return <AddComment space={this.props.space} clickConfirmed={e => this.changeState(e)} />;
     }
 
     return (
@@ -43,7 +44,7 @@ class SpaceDetail extends Component {
         <h2>{this.props.space.name}</h2>
         <hr />
         <p>{this.props.space.address} </p>
-        <p>{this.props.space.website}</p>
+        <p style={{ overflowWrap: 'break-word' }}>{this.props.space.website}</p>
         <p>{this.props.space.description} </p>
         {this.props.space.price && <div>There is a charge for this space</div>}
         Available amenitities:

@@ -235,6 +235,7 @@ class Spaces extends Component {
                     &lt;
                   </Button>
                   <br />
+                  <br />
                   <div style={{ maxHeight: '100px!important' }}>
                     <UncontrolledCarousel items={this.state.card.picture} />
                   </div>

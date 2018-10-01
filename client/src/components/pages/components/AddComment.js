@@ -19,6 +19,7 @@ class AddComment extends Component {
 
     api.addComment(comment, space).then(result => {
       console.log('SUCCESS!');
+      this.props.clickConfirmed(e);
     });
   }
   handleChange(e) {

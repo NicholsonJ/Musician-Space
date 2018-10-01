@@ -32,7 +32,7 @@ MONGODB_URI=......
 
 ## Commands
 
-###To download
+### To download
 
 **To install all the packages**
 

@@ -6395,11 +6395,14 @@ a.text-dark:hover, a.text-dark:focus {
   background-color: #ffffff;
   height: 100vh;
   z-index: 5;
-  width: 40%; }
+  width: 100%;
+  padding: 20px; }
 
 .spaceDetail {
   transition-delay: 0.5s;
-  transform: inherit; }
+  transform: inherit;
+  padding: 5px;
+  overflow: wrap; }
 
 @media (min-width: 768px) {
   .googleMaps {
@@ -6412,7 +6415,8 @@ a.text-dark:hover, a.text-dark:focus {
     background-color: #ffffff;
     height: 90vh;
     z-index: 5;
-    width: 40%; } }
+    width: 40%;
+    padding: 20px; } }
 
 @-webkit-keyframes slide {
   100% {

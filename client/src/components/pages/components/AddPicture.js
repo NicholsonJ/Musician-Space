@@ -15,13 +15,12 @@ class AddPicture extends Component {
 
   handleClick(e) {
     e.preventDefault();
-    console.log(this.state);
     let picture = this.state.picture;
     let space = this.props.space;
-    console.log(picture);
 
     api.addPic(picture, space).then(result => {
       console.log('SUCCESS!');
+      this.props.clickConfirmed(e);
     });
   }
   handleFile(e) {
