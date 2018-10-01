@@ -1,6 +1,13 @@
 # MUSICIAN SPACE
 
-A SPACE FOR
+A RESOURCE FOR MUSICIANS TO FIND PRACTICE ROOMS AROUND THE WORLD.
+
+![Landing Page](images/LandingPage.png)
+
+![Locations and Map](images/HomePage.png)
+
+![Responsive application](images/Responsive1.png)
+![Map view on phone](images/Responsive2.png)
 
 ## Global information
 
@@ -18,6 +25,9 @@ MONGODB_URI=......
 ## Commands
 
 ###To download
+
+**To install all the packages**
+
 $ git clone
 
 **To install all the packages**
