@@ -34,7 +34,7 @@ MONGODB_URI=......
 
 ### To download
 
-**To install all the packages**
+**To clone**
 
 $ git clone
 
