@@ -2,6 +2,9 @@
 
 A RESOURCE FOR MUSICIANS TO FIND PRACTICE ROOMS AROUND THE WORLD.
 
+See an example at: http://musicianspace.herokuapp.com/
+The city of Chicago, IL in the US has several spaces demonstrated.
+
 ![Landing Page](client/public/images/LandingPage.png)
 
 ### Filter your results by location
